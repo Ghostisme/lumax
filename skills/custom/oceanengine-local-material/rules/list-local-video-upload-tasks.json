@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "name": "list-local-video-upload-tasks",
+  "title": "查询异步上传本地推视频结果",
+  "operation_type": "read",
+  "path": "/open_api/v3.0/local/file/video/upload_task/list/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localFileVideoUploadTaskList",
+    "match_tokens": [
+      "local",
+      "file",
+      "video",
+      "upload_task",
+      "list",
+      "查询异步上传本地推视频结果"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": true,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推账号ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "task_ids",
+      "label": "上传任务ID列表",
+      "type": "array",
+      "required": true
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "task_ids"
+    ],
+    "response_fields": [
+      {
+        "path": "code",
+        "field": "code",
+        "label": "返回码",
+        "type": "number",
+        "description": "返回码,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "message",
+        "field": "message",
+        "label": "返回信息",
+        "type": "string",
+        "description": "返回信息,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data",
+        "field": "data",
+        "label": "json返回值",
+        "type": "json",
+        "description": "json返回值",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[]",
+        "field": "list",
+        "label": "任务列表",
+        "type": "object[]",
+        "description": "任务列表",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].status",
+        "field": "status",
+        "label": "任务处理状态",
+        "type": "string",
+        "description": "任务处理状态 可选值: PROCESS 处理中 SUCCESS 成功 FAILED 失败",
+        "display": "default"
+      },
+      {
+        "path": "data.list[].error_msg",
+        "field": "error_msg",
+        "label": "失败信息",
+        "type": "string",
+        "description": "当任务失败后，会返回失败信息",
+        "display": "default"
+      },
+      {
+        "path": "data.list[].create_time",
+        "field": "create_time",
+        "label": "任务创建时间",
+        "type": "string",
+        "description": "任务创建时间",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].task_id",
+        "field": "task_id",
+        "label": "任务id",
+        "type": "number",
+        "description": "任务id",
+        "display": "default"
+      },
+      {
+        "path": "data.list[].video_info",
+        "field": "video_info",
+        "label": "视频信息",
+        "type": "object",
+        "description": "视频信息",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].video_info.video_id",
+        "field": "video_id",
+        "label": "视频id",
+        "type": "string",
+        "description": "视频id",
+        "display": "default"
+      },
+      {
+        "path": "data.list[].video_info.material_id",
+        "field": "material_id",
+        "label": "素材id",
+        "type": "number",
+        "description": "素材id",
+        "display": "default"
+      },
+      {
+        "path": "data.list[].video_info.size",
+        "field": "size",
+        "label": "视频大小",
+        "type": "number",
+        "description": "视频大小",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].video_info.video_signature",
+        "field": "video_signature",
+        "label": "视频md5",
+        "type": "string",
+        "description": "视频md5",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].video_info.width",
+        "field": "width",
+        "label": "视频宽",
+        "type": "number",
+        "description": "视频宽",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].video_info.height",
+        "field": "height",
+        "label": "视频高",
+        "type": "number",
+        "description": "视频高",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].video_info.video_url",
+        "field": "video_url",
+        "label": "视频预览链接",
+        "type": "string",
+        "description": "视频预览链接",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].video_info.duration",
+        "field": "duration",
+        "label": "视频时长",
+        "type": "double",
+        "description": "视频时长",
+        "display": "diagnostic"
+      },
+      {
+        "path": "request_id",
+        "field": "request_id",
+        "label": "请求日志id",
+        "type": "string",
+        "description": "请求日志id",
+        "display": "diagnostic"
+      }
+    ]
+  },
+  "mcp_tool_name": "localFileVideoUploadTaskList",
+  "match_tokens": [
+    "local",
+    "file",
+    "video",
+    "upload_task",
+    "list",
+    "查询异步上传本地推视频结果"
+  ],
+  "required": [
+    "local_account_id",
+    "task_ids"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推账号ID",
+    "task_ids": "上传任务ID列表"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "task_ids": {
+      "type": "array",
+      "min_items": 1,
+      "max_items": 100
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": [],
+  "mcp_wrap_request": true
+}

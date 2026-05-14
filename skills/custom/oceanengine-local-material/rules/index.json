@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "skill": "oceanengine-local-material",
+  "capabilities": [
+    {
+      "name": "async-upload-local-video",
+      "operation_type": "mutation",
+      "reference": "references/async-upload-local-video.md",
+      "rule": "rules/async-upload-local-video.json",
+      "script": "scripts/endpoints/async_upload_local_video.py"
+    },
+    {
+      "name": "list-local-video-upload-tasks",
+      "operation_type": "read",
+      "reference": "references/list-local-video-upload-tasks.md",
+      "rule": "rules/list-local-video-upload-tasks.json",
+      "script": "scripts/endpoints/list_local_video_upload_tasks.py"
+    },
+    {
+      "name": "upload-video",
+      "operation_type": "mutation",
+      "reference": "references/upload-video.md",
+      "rule": "rules/upload-video.json",
+      "script": "scripts/endpoints/upload_video.py"
+    },
+    {
+      "name": "get-library-videos",
+      "operation_type": "read",
+      "reference": "references/get-library-videos.md",
+      "rule": "rules/get-library-videos.json",
+      "script": "scripts/endpoints/get_library_videos.py"
+    },
+    {
+      "name": "get-aweme-videos",
+      "operation_type": "read",
+      "reference": "references/get-aweme-videos.md",
+      "rule": "rules/get-aweme-videos.json",
+      "script": "scripts/endpoints/get_aweme_videos.py"
+    },
+    {
+      "name": "list-carousel-materials",
+      "operation_type": "read",
+      "reference": "references/list-carousel-materials.md",
+      "rule": "rules/list-carousel-materials.json",
+      "script": "scripts/endpoints/list_carousel_materials.py"
+    },
+    {
+      "name": "upload-image",
+      "operation_type": "mutation",
+      "reference": "references/upload-image.md",
+      "rule": "rules/upload-image.json",
+      "script": "scripts/endpoints/upload_image.py"
+    },
+    {
+      "name": "list-video-material-attributes",
+      "operation_type": "read",
+      "reference": "references/list-video-material-attributes.md",
+      "rule": "rules/list-video-material-attributes.json",
+      "script": "scripts/endpoints/list_video_material_attributes.py"
+    }
+  ]
+}

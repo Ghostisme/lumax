@@ -1,0 +1,638 @@
+{
+  "schema_version": 1,
+  "name": "get-unit-detail",
+  "title": "获取单元详情",
+  "operation_type": "read",
+  "path": "/open_api/v3.0/local/promotion/detail/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localUnitDetail",
+    "match_tokens": [
+      "local",
+      "promotion",
+      "detail",
+      "获取单元详情"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": false,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "promotion_id",
+      "label": "单元ID",
+      "type": "number",
+      "required": true
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "promotion_id"
+    ],
+    "response_fields": [
+      {
+        "path": "code",
+        "field": "code",
+        "label": "返回码",
+        "type": "number",
+        "description": "返回码,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "message",
+        "field": "message",
+        "label": "返回信息",
+        "type": "string",
+        "description": "返回信息,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data",
+        "field": "data",
+        "label": "返回数据",
+        "type": "json",
+        "description": "返回数据",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_id",
+        "field": "promotion_id",
+        "label": "单元ID",
+        "type": "number",
+        "description": "单元ID",
+        "display": "default"
+      },
+      {
+        "path": "data.enable_graphic_delivery",
+        "field": "enable_graphic_delivery",
+        "label": "是否开启团购卡",
+        "type": "bool",
+        "description": "是否开启团购卡",
+        "display": "default"
+      },
+      {
+        "path": "data.aweme_id",
+        "field": "aweme_id",
+        "label": "抖音号",
+        "type": "string",
+        "description": "抖音号",
+        "display": "default"
+      },
+      {
+        "path": "data.video_hp_visibility",
+        "field": "video_hp_visibility",
+        "label": "抖音主页可见性",
+        "type": "string",
+        "description": "抖音主页可见性，枚举值：ALWAYS_VISIBLE 抖音主页可见；HIDE_VIDEO_ON_HP 抖音主页单次可见",
+        "display": "default"
+      },
+      {
+        "path": "data.live_material_type",
+        "field": "live_material_type",
+        "label": "直播素材类型",
+        "type": "string",
+        "description": "直播素材类型，枚举值：LIVE 直播素材；VIDEO 单元素材",
+        "display": "default"
+      },
+      {
+        "path": "data.customer_material_list[]",
+        "field": "customer_material_list",
+        "label": "自定义素材组合",
+        "type": "object[]",
+        "description": "自定义素材组合",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].image_mode",
+        "field": "image_mode",
+        "label": "素材类型",
+        "type": "string",
+        "description": "素材类型，枚举值：IMAGE_MODE_VIDEO 横版视频；IMAGE_MODE_VIDEO_VERTICAL 竖版视频",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].title_material",
+        "field": "title_material",
+        "label": "标题",
+        "type": "object",
+        "description": "标题",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].title_material.title",
+        "field": "title",
+        "label": "标题内容",
+        "type": "string",
+        "description": "标题内容",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].title_material.lego_material_id",
+        "field": "lego_material_id",
+        "label": "标题素材库id",
+        "type": "number",
+        "description": "标题素材库id",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].title_material.material_id",
+        "field": "material_id",
+        "label": "标题素材id",
+        "type": "number",
+        "description": "标题素材id",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].video_material",
+        "field": "video_material",
+        "label": "视频",
+        "type": "object",
+        "description": "视频",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].video_material.video_id",
+        "field": "video_id",
+        "label": "视频id",
+        "type": "string",
+        "description": "视频id",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].video_material.lego_material_id",
+        "field": "lego_material_id",
+        "label": "视频素材库id",
+        "type": "number",
+        "description": "视频素材库id",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].video_material.material_id",
+        "field": "material_id",
+        "label": "视频素材id",
+        "type": "number",
+        "description": "视频素材id",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].video_material.aweme_item_id",
+        "field": "aweme_item_id",
+        "label": "抖音主页视频ID",
+        "type": "number",
+        "description": "抖音主页视频ID",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].video_material.image_mode",
+        "field": "image_mode",
+        "label": "素材类型",
+        "type": "string",
+        "description": "素材类型，枚举值：IMAGE_MODE_VIDEO 横版视频；IMAGE_MODE_VIDEO_VERTICAL 竖版视频",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].video_material.video_duration",
+        "field": "video_duration",
+        "label": "视频长度",
+        "type": "number",
+        "description": "视频长度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].video_material.video_height",
+        "field": "video_height",
+        "label": "视频高度",
+        "type": "number",
+        "description": "视频高度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].video_material.video_width",
+        "field": "video_width",
+        "label": "视频宽度",
+        "type": "number",
+        "description": "视频宽度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].video_material.video_play_url",
+        "field": "video_play_url",
+        "label": "视频播放链接",
+        "type": "string",
+        "description": "视频播放链接",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].video_material.cover_image_height",
+        "field": "cover_image_height",
+        "label": "封面图片高度",
+        "type": "number",
+        "description": "封面图片高度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].video_material.cover_image_width",
+        "field": "cover_image_width",
+        "label": "封面图片宽度",
+        "type": "number",
+        "description": "封面图片宽度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].video_material.cover_web_uri",
+        "field": "cover_web_uri",
+        "label": "封面图片uri",
+        "type": "string",
+        "description": "封面图片uri",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.customer_material_list[].video_material.cover_web_url",
+        "field": "cover_web_url",
+        "label": "封面图片链接",
+        "type": "string",
+        "description": "封面图片链接",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material",
+        "field": "procedural_material",
+        "label": "线索单元-素材列表",
+        "type": "object",
+        "description": "线索单元-素材列表",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.title_material_list[]",
+        "field": "title_material_list",
+        "label": "标题素材列表",
+        "type": "object[]",
+        "description": "标题素材列表",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.title_material_list[].title",
+        "field": "title",
+        "label": "标题内容",
+        "type": "string",
+        "description": "标题内容",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.title_material_list[].lego_material_id",
+        "field": "lego_material_id",
+        "label": "标题素材库id",
+        "type": "number",
+        "description": "标题素材库id",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.title_material_list[].material_id",
+        "field": "material_id",
+        "label": "标题素材id",
+        "type": "number",
+        "description": "标题素材id",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.video_material_list[]",
+        "field": "video_material_list",
+        "label": "视频素材",
+        "type": "object[]",
+        "description": "视频素材",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.video_material_list[].image_mode",
+        "field": "image_mode",
+        "label": "素材类型",
+        "type": "string",
+        "description": "素材类型，可选值：IMAGE_MODE_VIDEO 横版视频；IMAGE_MODE_VIDEO_VERTICAL 竖版视频",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.video_material_list[].video_id",
+        "field": "video_id",
+        "label": "视频id",
+        "type": "string",
+        "description": "视频id",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.video_material_list[].lego_material_id",
+        "field": "lego_material_id",
+        "label": "标题素材库id",
+        "type": "number",
+        "description": "标题素材库id",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.video_material_list[].material_id",
+        "field": "material_id",
+        "label": "标题素材id",
+        "type": "number",
+        "description": "标题素材id",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.video_material_list[].video_duration",
+        "field": "video_duration",
+        "label": "视频长度",
+        "type": "number",
+        "description": "视频长度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.video_material_list[].video_height",
+        "field": "video_height",
+        "label": "视频高度",
+        "type": "number",
+        "description": "视频高度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.video_material_list[].video_width",
+        "field": "video_width",
+        "label": "视频宽度",
+        "type": "number",
+        "description": "视频宽度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.video_material_list[].video_play_url",
+        "field": "video_play_url",
+        "label": "视频播放链接",
+        "type": "string",
+        "description": "视频播放链接",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.video_material_list[].cover_image_height",
+        "field": "cover_image_height",
+        "label": "封面图片高度",
+        "type": "number",
+        "description": "封面图片高度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.video_material_list[].cover_image_width",
+        "field": "cover_image_width",
+        "label": "封面图片宽度",
+        "type": "number",
+        "description": "封面图片宽度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.video_material_list[].cover_web_uri",
+        "field": "cover_web_uri",
+        "label": "封面图片uri",
+        "type": "string",
+        "description": "封面图片uri",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.video_material_list[].cover_web_url",
+        "field": "cover_web_url",
+        "label": "封面图片链接",
+        "type": "string",
+        "description": "封面图片链接",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.video_material_list[].is_ff_see_setting",
+        "field": "is_ff_see_setting",
+        "label": "视频主页可见性",
+        "type": "string",
+        "description": "视频主页可见性，可选值：ALWAYS_VISIBLE 抖音主页可见；HIDE_VIDEO_ON_HP 抖音主页单次可见；UNKNOWN 未设置",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.carousel_material_list[]",
+        "field": "carousel_material_list",
+        "label": "图文素材",
+        "type": "object[]",
+        "description": "图文素材",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.carousel_material_list[].carousel_id",
+        "field": "carousel_id",
+        "label": "图文素材id",
+        "type": "number",
+        "description": "图文素材id",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.carousel_material_list[].image_list[]",
+        "field": "image_list",
+        "label": "图文图片信息",
+        "type": "object[]",
+        "description": "图文图片信息",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.carousel_material_list[].image_list[].uri",
+        "field": "uri",
+        "label": "图文uri",
+        "type": "string",
+        "description": "图文uri",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.carousel_material_list[].image_list[].url",
+        "field": "url",
+        "label": "图文url",
+        "type": "string",
+        "description": "图文url",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.carousel_material_list[].image_list[].height",
+        "field": "height",
+        "label": "图片高度",
+        "type": "number",
+        "description": "图片高度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.carousel_material_list[].image_list[].width",
+        "field": "width",
+        "label": "图片宽度",
+        "type": "number",
+        "description": "图片宽度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.carousel_material_list[].music",
+        "field": "music",
+        "label": "音乐素材",
+        "type": "object",
+        "description": "音乐素材",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.carousel_material_list[].music.music_id",
+        "field": "music_id",
+        "label": "音乐id",
+        "type": "string",
+        "description": "音乐id",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.carousel_material_list[].music.music_vid",
+        "field": "music_vid",
+        "label": "音乐id",
+        "type": "string",
+        "description": "音乐id",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.procedural_material.carousel_material_list[].music.music_url",
+        "field": "music_url",
+        "label": "音乐播放url",
+        "type": "string",
+        "description": "音乐播放url",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_card_info",
+        "field": "promotion_card_info",
+        "label": "线索单元-投放卡片素材",
+        "type": "object",
+        "description": "线索单元-投放卡片素材",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_card_info.product_name",
+        "field": "product_name",
+        "label": "卡片标题",
+        "type": "string",
+        "description": "卡片标题",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_card_info.product_images[]",
+        "field": "product_images",
+        "label": "卡片配图",
+        "type": "object[]",
+        "description": "卡片配图",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_card_info.product_images[].image_uri",
+        "field": "image_uri",
+        "label": "图片uri",
+        "type": "string",
+        "description": "图片uri",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_card_info.product_images[].image_url",
+        "field": "image_url",
+        "label": "图片预览url",
+        "type": "string",
+        "description": "图片预览url",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_card_info.product_images[].height",
+        "field": "height",
+        "label": "图片高度",
+        "type": "number",
+        "description": "图片高度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_card_info.product_images[].width",
+        "field": "width",
+        "label": "图片宽度",
+        "type": "number",
+        "description": "图片宽度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_card_info.product_selling_points[]",
+        "field": "product_selling_points",
+        "label": "投放卖点",
+        "type": "object[]",
+        "description": "投放卖点",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_card_info.product_selling_points[].selling_point",
+        "field": "selling_point",
+        "label": "卖点描述",
+        "type": "string",
+        "description": "卖点描述",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_card_info.call_to_actions[]",
+        "field": "call_to_actions",
+        "label": "行动号召",
+        "type": "object[]",
+        "description": "行动号召",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_card_info.call_to_actions[].action",
+        "field": "action",
+        "label": "号召描述",
+        "type": "string",
+        "description": "号召描述",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_card_info.enable_personal_call_to_action",
+        "field": "enable_personal_call_to_action",
+        "label": "行动号召是否开启智能生成",
+        "type": "bool",
+        "description": "行动号召是否开启智能生成",
+        "display": "diagnostic"
+      },
+      {
+        "path": "request_id",
+        "field": "request_id",
+        "label": "请求日志id",
+        "type": "string",
+        "description": "请求日志id",
+        "display": "diagnostic"
+      }
+    ]
+  },
+  "mcp_tool_name": "localUnitDetail",
+  "match_tokens": [
+    "local",
+    "promotion",
+    "detail",
+    "获取单元详情"
+  ],
+  "required": [
+    "local_account_id",
+    "promotion_id"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "promotion_id": "单元ID"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "promotion_id": {
+      "type": "number"
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": []
+}

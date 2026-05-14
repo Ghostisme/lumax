@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "name": "get-poi-ids-by-multi-poi-id",
+  "title": "根据多门店ID拉取门店ID",
+  "operation_type": "read",
+  "path": "/open_api/v3.0/local/multi_poi_id/poi_ids/get/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localMultiPoiIdPoiIdsGet",
+    "match_tokens": [
+      "local",
+      "multi_poi_id",
+      "poi_ids",
+      "根据多门店ID拉取门店ID"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": false,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "multi_poi_ids",
+      "label": "多门店ID列表",
+      "type": "array",
+      "min_items": 1,
+      "max_items": 50,
+      "required": true
+    },
+    {
+      "name": "need_enable",
+      "label": "是否仅查询当前在投门店",
+      "type": "boolean",
+      "required": false
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "multi_poi_ids",
+      "need_enable"
+    ],
+    "response_fields": [
+      {
+        "path": "data.multi_poi_info[].multi_poi_id",
+        "label": "多门店ID"
+      },
+      {
+        "path": "data.multi_poi_info[].poi_ids[]",
+        "label": "门店ID"
+      }
+    ]
+  },
+  "mcp_tool_name": "localMultiPoiIdPoiIdsGet",
+  "match_tokens": [
+    "local",
+    "multi_poi_id",
+    "poi_ids",
+    "根据多门店ID拉取门店ID"
+  ],
+  "required": [
+    "local_account_id",
+    "multi_poi_ids"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "multi_poi_ids": "多门店ID列表",
+    "need_enable": "是否仅查询当前在投门店"
+  },
+  "field_aliases": {
+    "multi_poi_id": "multi_poi_ids"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "multi_poi_ids": {
+      "type": "array",
+      "item_type": "number",
+      "min_items": 1,
+      "max_items": 50
+    },
+    "need_enable": {
+      "type": "boolean"
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": []
+}

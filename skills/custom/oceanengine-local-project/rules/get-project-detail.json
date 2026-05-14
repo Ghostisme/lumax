@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "name": "get-project-detail",
+  "title": "获取项目详情",
+  "operation_type": "read",
+  "path": "/open_api/v3.0/local/project/detail/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localProjectDetail",
+    "match_tokens": [
+      "local",
+      "project",
+      "detail",
+      "获取项目详情"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": false,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "project_id",
+      "label": "项目ID",
+      "type": "number",
+      "required": true,
+      "min": 1,
+      "max": 9223372036854775807
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "project_id"
+    ],
+    "response_fields": [
+      {
+        "path": "message",
+        "label": "返回信息"
+      },
+      {
+        "path": "data.project_id",
+        "label": "项目ID"
+      },
+      {
+        "path": "data.name",
+        "label": "项目名称"
+      },
+      {
+        "path": "data.marketing_goal",
+        "label": "营销场景"
+      },
+      {
+        "path": "data.local_delivery_scene",
+        "label": "营销目的"
+      },
+      {
+        "path": "data.ad_type",
+        "label": "单元类型"
+      },
+      {
+        "path": "data.budget",
+        "label": "项目预算（分）"
+      },
+      {
+        "path": "data.bid",
+        "label": "项目出价（分）"
+      },
+      {
+        "path": "data.bid_type",
+        "label": "出价方式"
+      },
+      {
+        "path": "data.budget_mode",
+        "label": "项目预算类型"
+      },
+      {
+        "path": "data.start_time",
+        "label": "投放开始时间"
+      },
+      {
+        "path": "data.end_time",
+        "label": "投放结束时间"
+      },
+      {
+        "path": "data.local_asset_type",
+        "label": "跳转页面"
+      }
+    ]
+  },
+  "mcp_tool_name": "localProjectDetail",
+  "match_tokens": [
+    "local",
+    "project",
+    "detail",
+    "获取项目详情"
+  ],
+  "required": [
+    "local_account_id",
+    "project_id"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "project_id": "项目ID"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "project_id": {
+      "type": "number",
+      "min": 1,
+      "max": 9223372036854775807
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": []
+}

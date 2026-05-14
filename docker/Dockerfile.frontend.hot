@@ -1,0 +1,20 @@
+# Frontend Dockerfile for Hot Reload - uses Amazon Linux base (pullable from ECR)
+
+FROM public.ecr.aws/amazonlinux/amazonlinux:2023 AS base
+
+# Install Node.js 20 from NodeSource and pnpm
+RUN curl -fsSL https://rpm.nodesource.com/setup_20.x | bash - && \
+    dnf install -y nodejs --allowerasing && \
+    npm install -g pnpm@10.26.2 && \
+    dnf clean all
+
+WORKDIR /app
+COPY frontend ./frontend
+WORKDIR /app/frontend
+
+EXPOSE 3000
+
+# For dev: install deps
+RUN pnpm install --frozen-lockfile
+
+CMD ["pnpm", "run", "dev"]

@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "name": "batch-update-project-status",
+  "title": "批量更新项目状态",
+  "operation_type": "batch",
+  "path": "/open_api/v3.0/local/project/status/update/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localProjectStatusBatchUpdate",
+    "match_tokens": [
+      "local",
+      "project",
+      "status",
+      "update",
+      "批量更新项目状态"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": true,
+    "batch_field": "data"
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "items",
+      "label": "批量项目状态列表",
+      "type": "array",
+      "min_items": 1,
+      "max_items": 100,
+      "required": true
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "items"
+    ]
+  },
+  "mcp_tool_name": "localProjectStatusBatchUpdate",
+  "match_tokens": [
+    "local",
+    "project",
+    "status",
+    "update",
+    "批量更新项目状态"
+  ],
+  "required": [
+    "local_account_id",
+    "items"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "items": "批量项目状态列表"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "items": {
+      "type": "array",
+      "min_items": 1,
+      "max_items": 100
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": [],
+  "mcp_value_maps": {},
+  "mcp_wrap_request": true,
+  "mcp_batch_field": "data",
+  "batch_field": "items",
+  "batch_item": {
+    "required": [
+      "project_id",
+      "opt_status"
+    ],
+    "field_labels": {
+      "project_id": "项目ID",
+      "opt_status": "项目操作状态"
+    },
+    "fields": {
+      "project_id": {
+        "type": "number"
+      },
+      "opt_status": {
+        "type": "string",
+        "enum": [
+          "ENABLE",
+          "PAUSED"
+        ],
+        "enum_labels": {
+          "ENABLE": "启用项目",
+          "PAUSED": "暂停项目"
+        }
+      }
+    }
+  },
+  "batch": {
+    "field": "items",
+    "item_identifier": "project_id",
+    "item_schema": {
+      "parameters": [
+        {
+          "name": "project_id",
+          "label": "项目ID",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "opt_status",
+          "label": "项目操作状态",
+          "type": "string",
+          "enum": [
+            "ENABLE",
+            "PAUSED"
+          ],
+          "enum_labels": {
+            "ENABLE": "启用项目",
+            "PAUSED": "暂停项目"
+          },
+          "required": true
+        }
+      ],
+      "constraints": []
+    }
+  },
+  "confirmation": {
+    "enabled": true,
+    "query_capability": "list-projects",
+    "max_retries": 3,
+    "mode": "batch_project_detail",
+    "batch_field": "items"
+  }
+}

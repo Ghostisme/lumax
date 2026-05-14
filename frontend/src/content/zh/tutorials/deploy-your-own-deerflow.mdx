@@ -1,0 +1,61 @@
+---
+title: 閮ㄧ讲浣犵殑 DeerFlow
+description: 鏈暀绋嬪紩瀵间綘灏?DeerFlow 閮ㄧ讲鍒扮敓浜х幆澧冿紝浣跨敤 Docker Compose 杩涜澶氱敤鎴疯闂€?---
+
+# 閮ㄧ讲浣犵殑 DeerFlow
+
+鏈暀绋嬪紩瀵间綘灏?DeerFlow 閮ㄧ讲鍒扮敓浜х幆澧冿紝浣跨敤 Docker Compose 杩涜澶氱敤鎴疯闂€?
+## 鍓嶇疆鏉′欢
+
+- 宸插畨瑁?Docker 鍜?Docker Compose
+- 鏈嶅姟鍣ㄦ垨 VM锛圠inux 鎺ㄨ崘锛?- LLM API Key
+
+## 姝ラ
+
+### 1. 鍏嬮殕浠撳簱
+
+```bash
+git clone https://github.com/bytedance/deer-flow.git
+cd deer-flow
+```
+
+### 2. 鍒涘缓閰嶇疆鏂囦欢
+
+```bash
+cp config.example.yaml config.yaml
+```
+
+缂栬緫 `config.yaml` 娣诲姞浣犵殑妯″瀷閰嶇疆銆?
+### 3. 鍒涘缓鐜鍙橀噺鏂囦欢
+
+```bash
+cat > .env << EOF
+OPENAI_API_KEY=sk-your-key-here
+DEER_FLOW_ROOT=$(pwd)
+EOF
+```
+
+### 4. 鍚姩鏈嶅姟
+
+```bash
+docker compose -f docker/docker-compose-dev.yaml up -d
+```
+
+### 5. 楠岃瘉閮ㄧ讲
+
+```bash
+# 妫€鏌ユ墍鏈夋湇鍔″仴搴风姸鎬?curl http://localhost:2026/api/models
+
+# 鏌ョ湅鏈嶅姟鏃ュ織
+docker compose -f docker/docker-compose-dev.yaml logs -f
+```
+
+璁块棶 `http://your-server:2026` 寮€濮嬩娇鐢ㄣ€?
+## 鐢熶骇娉ㄦ剰浜嬮」
+
+- 涓?nginx 閰嶇疆 HTTPS/TLS 璇佷功
+- 瀹氭湡澶囦唤 `backend/.deer-flow/` 鐩綍
+
+## 涓嬩竴姝?
+- [閮ㄧ讲鎸囧崡锛堝畬鏁寸増锛塢(/docs/application/deployment-guide)
+- [杩愮淮涓庢帓闅淽(/docs/application/operations-and-troubleshooting)

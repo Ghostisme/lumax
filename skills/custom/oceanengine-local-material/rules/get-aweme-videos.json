@@ -1,0 +1,412 @@
+{
+  "schema_version": 1,
+  "name": "get-aweme-videos",
+  "title": "获取抖音主页视频",
+  "operation_type": "read",
+  "path": "/open_api/v3.0/local/file/video/aweme/get/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localFileVideoAwemeGet",
+    "match_tokens": [
+      "local",
+      "file",
+      "video",
+      "aweme",
+      "get",
+      "获取抖音主页视频"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": true,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推账号ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "cursor",
+      "label": "分页游标",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "filtering",
+      "label": "过滤条件",
+      "type": "object",
+      "required": true
+    },
+    {
+      "name": "external_action",
+      "label": "优化目标",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "order_field",
+      "label": "排序字段",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "page_size",
+      "label": "每页数量",
+      "type": "integer",
+      "required": false
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "cursor",
+      "filtering",
+      "page_size"
+    ],
+    "response_fields": [
+      {
+        "path": "code",
+        "field": "code",
+        "label": "返回码",
+        "type": "number",
+        "description": "返回码,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "message",
+        "field": "message",
+        "label": "返回信息",
+        "type": "string",
+        "description": "返回信息,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data",
+        "field": "data",
+        "label": "json返回值",
+        "type": "json",
+        "description": "json返回值",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[]",
+        "field": "video_list",
+        "label": "视频列表",
+        "type": "object[]",
+        "description": "视频列表",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[].item_id",
+        "field": "item_id",
+        "label": "抖音视频ID",
+        "type": "string",
+        "description": "抖音视频ID",
+        "display": "default"
+      },
+      {
+        "path": "data.video_list[].title",
+        "field": "title",
+        "label": "视频标题",
+        "type": "string",
+        "description": "视频标题",
+        "display": "default"
+      },
+      {
+        "path": "data.video_list[].video_id",
+        "field": "video_id",
+        "label": "视频ID",
+        "type": "string",
+        "description": "视频ID",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[].aweme_id",
+        "field": "aweme_id",
+        "label": "抖音号id",
+        "type": "string",
+        "description": "抖音号id",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[].aweme_name",
+        "field": "aweme_name",
+        "label": "抖音号名称",
+        "type": "string",
+        "description": "抖音号名称",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[].image_mode",
+        "field": "image_mode",
+        "label": "视频格式",
+        "type": "string",
+        "description": "视频格式 可选值: IMAGE_MODE_LOCAL_ADGRAPHIC 团购卡 IMAGE_MODE_VIDEO 横版视频 IMAGE_MODE_VIDEO_VERTICAL 竖版视频",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[].duration",
+        "field": "duration",
+        "label": "时长",
+        "type": "string",
+        "description": "时长",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[].cover_image_url",
+        "field": "cover_image_url",
+        "label": "视频封面图片地址",
+        "type": "string",
+        "description": "视频封面图片地址",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[].aweme_video_url",
+        "field": "aweme_video_url",
+        "label": "视频播放地址",
+        "type": "string",
+        "description": "视频播放地址",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[].not_delivery_reason[]",
+        "field": "not_delivery_reason",
+        "label": "不可投放原因",
+        "type": "string[]",
+        "description": "不可投放原因",
+        "display": "default"
+      },
+      {
+        "path": "data.video_list[].can_delivery",
+        "field": "can_delivery",
+        "label": "视频是否可投放",
+        "type": "bool",
+        "description": "视频是否可投放 true 可投放 false 不可投放",
+        "display": "default"
+      },
+      {
+        "path": "data.video_list[].lego_material_id",
+        "field": "lego_material_id",
+        "label": "素材id",
+        "type": "number",
+        "description": "素材id",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[].video_width",
+        "field": "video_width",
+        "label": "视频宽度",
+        "type": "number",
+        "description": "视频宽度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[].video_heigh",
+        "field": "video_heigh",
+        "label": "视频高度",
+        "type": "number",
+        "description": "视频高度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.page_info",
+        "field": "page_info",
+        "label": "分页信息",
+        "type": "object",
+        "description": "分页信息",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.page_info.cursor",
+        "field": "cursor",
+        "label": "页码游标值",
+        "type": "string",
+        "description": "页码游标值",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.page_info.has_more",
+        "field": "has_more",
+        "label": "是否有下一页",
+        "type": "bool",
+        "description": "是否有下一页",
+        "display": "default"
+      },
+      {
+        "path": "request_id",
+        "field": "request_id",
+        "label": "请求日志id",
+        "type": "string",
+        "description": "请求日志id",
+        "display": "diagnostic"
+      }
+    ]
+  },
+  "mcp_tool_name": "localFileVideoAwemeGet",
+  "match_tokens": [
+    "local",
+    "file",
+    "video",
+    "aweme",
+    "get",
+    "获取抖音主页视频"
+  ],
+  "required": [
+    "local_account_id",
+    "cursor",
+    "filtering",
+    "filtering.anchor_info",
+    "filtering.anchor_info.anchor_types"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推账号ID",
+    "cursor": "分页游标",
+    "filtering": "过滤条件",
+    "filtering.anchor_info": "挂载信息",
+    "filtering.anchor_info.anchor_types": "挂载类型列表",
+    "filtering.anchor_info.poi_ids": "门店ID列表",
+    "filtering.anchor_info.product_ids": "商品ID列表",
+    "filtering.aweme_ids": "抖音号ID列表",
+    "filtering.item_ids": "视频 item_id 列表",
+    "filtering.item_status": "素材状态",
+    "filtering.start_time": "筛选开始时间",
+    "filtering.end_time": "筛选结束时间",
+    "external_action": "优化目标",
+    "order_field": "排序字段",
+    "page_size": "每页数量"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "cursor": {
+      "type": "string"
+    },
+    "filtering": {
+      "type": "object"
+    },
+    "filtering.anchor_info": {
+      "type": "object"
+    },
+    "filtering.anchor_info.anchor_types": {
+      "type": "array",
+      "min_items": 1
+    },
+    "filtering.anchor_info.anchor_types[]": {
+      "type": "string",
+      "enum": [
+        "ALL_ANCHOR",
+        "POI_ANCHOR",
+        "PRODUCT_ANCHOR"
+      ],
+      "enum_labels": {
+        "ALL_ANCHOR": "全部挂载",
+        "POI_ANCHOR": "门店挂载",
+        "PRODUCT_ANCHOR": "商品挂载"
+      }
+    },
+    "filtering.anchor_info.poi_ids": {
+      "type": "array",
+      "min_items": 1
+    },
+    "filtering.anchor_info.product_ids": {
+      "type": "array",
+      "min_items": 1
+    },
+    "filtering.aweme_ids": {
+      "type": "array"
+    },
+    "filtering.item_ids": {
+      "type": "array",
+      "max_items": 10
+    },
+    "filtering.item_status": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "VALID"
+      ],
+      "enum_labels": {
+        "ALL": "全部",
+        "VALID": "有效"
+      }
+    },
+    "filtering.start_time": {
+      "type": "string"
+    },
+    "filtering.end_time": {
+      "type": "string"
+    },
+    "external_action": {
+      "type": "string",
+      "enum": [
+        "OTO_PAY",
+        "POI_RECOMMEND"
+      ],
+      "enum_labels": {
+        "OTO_PAY": "团购购买",
+        "POI_RECOMMEND": "门店引流"
+      }
+    },
+    "order_field": {
+      "type": "string",
+      "enum": [
+        "ARRIVE_SHOP",
+        "ESTIMATE",
+        "LIKE_CNT",
+        "PAY_ORDER_CNT",
+        "PUBLISH_TIME"
+      ],
+      "enum_labels": {
+        "ARRIVE_SHOP": "到店",
+        "ESTIMATE": "预估",
+        "LIKE_CNT": "点赞数",
+        "PAY_ORDER_CNT": "支付订单数",
+        "PUBLISH_TIME": "发布时间"
+      }
+    },
+    "page_size": {
+      "type": "integer",
+      "min": 1,
+      "max": 100
+    }
+  },
+  "conditional_required": [
+    {
+      "when": {
+        "field": "filtering.anchor_info.anchor_types[]",
+        "equals": "POI_ANCHOR"
+      },
+      "fields": [
+        "filtering.anchor_info.poi_ids"
+      ],
+      "message": "anchor_types 包含 POI_ANCHOR 时需要提供门店ID列表"
+    },
+    {
+      "when": {
+        "field": "filtering.anchor_info.anchor_types[]",
+        "equals": "PRODUCT_ANCHOR"
+      },
+      "fields": [
+        "filtering.anchor_info.product_ids"
+      ],
+      "message": "anchor_types 包含 PRODUCT_ANCHOR 时需要提供商品ID列表"
+    },
+    {
+      "when": {
+        "field": "filtering.anchor_info.anchor_types[]",
+        "equals": "ALL_ANCHOR"
+      },
+      "fields": [
+        "filtering.aweme_ids"
+      ],
+      "message": "anchor_types 包含 ALL_ANCHOR 时需要提供抖音号ID列表"
+    }
+  ],
+  "forbidden_when": [],
+  "mcp_wrap_request": true
+}

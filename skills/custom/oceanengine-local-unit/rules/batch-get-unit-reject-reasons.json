@@ -1,0 +1,236 @@
+{
+  "schema_version": 1,
+  "name": "batch-get-unit-reject-reasons",
+  "title": "批量获取广告审核建议",
+  "operation_type": "read",
+  "path": "/open_api/v3.0/local/promotion/reject_reason/get/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localPromotionRejectReasonBatchGet",
+    "match_tokens": [
+      "local",
+      "promotion",
+      "reject",
+      "reason",
+      "批量获取广告审核建议"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": false,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "promotion_ids",
+      "label": "单元ID列表",
+      "type": "array",
+      "required": true,
+      "min_items": 1,
+      "max_items": 10
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "promotion_ids"
+    ],
+    "response_fields": [
+      {
+        "path": "code",
+        "field": "code",
+        "label": "返回码",
+        "type": "number",
+        "description": "返回码,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "message",
+        "field": "message",
+        "label": "返回信息",
+        "type": "string",
+        "description": "返回信息,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data",
+        "field": "data",
+        "label": "json返回值",
+        "type": "json",
+        "description": "json返回值",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[]",
+        "field": "list",
+        "label": "单元审核建议列表",
+        "type": "object[]",
+        "description": "单元审核建议列表",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].promotion_id",
+        "field": "promotion_id",
+        "label": "单元id",
+        "type": "number",
+        "description": "单元id",
+        "display": "default"
+      },
+      {
+        "path": "data.list[].material_reject[]",
+        "field": "material_reject",
+        "label": "素材维度审核建议列表",
+        "type": "object[]",
+        "description": "素材维度审核建议列表",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].material_reject[].audit_platform",
+        "field": "audit_platform",
+        "label": "审核建议来源类型",
+        "type": "string",
+        "description": "审核建议来源类型，可选值：AD 广告审核；CONTENT 内容审核",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].material_reject[].type",
+        "field": "type",
+        "label": "审核建议素材类型",
+        "type": "string",
+        "description": "审核建议素材类型",
+        "display": "default"
+      },
+      {
+        "path": "data.list[].material_reject[].content",
+        "field": "content",
+        "label": "审核拒绝的具体内容",
+        "type": "string",
+        "description": "审核拒绝的具体内容",
+        "display": "default"
+      },
+      {
+        "path": "data.list[].material_reject[].video_material",
+        "field": "video_material",
+        "label": "审核拒绝视频素材",
+        "type": "object",
+        "description": "审核拒绝视频素材",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].material_reject[].video_material.video_id",
+        "field": "video_id",
+        "label": "审核拒绝视频素材id",
+        "type": "string",
+        "description": "审核拒绝视频素材id",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].material_reject[].video_material.video_url",
+        "field": "video_url",
+        "label": "审核拒绝视频素材url",
+        "type": "string",
+        "description": "审核拒绝视频素材url",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].material_reject[].image_material[]",
+        "field": "image_material",
+        "label": "审核拒绝图片素材",
+        "type": "object[]",
+        "description": "审核拒绝图片素材",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].material_reject[].image_material[].web_url",
+        "field": "web_url",
+        "label": "审核拒绝图片url",
+        "type": "string",
+        "description": "审核拒绝图片url",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].material_reject[].image_material[].web_uri",
+        "field": "web_uri",
+        "label": "审核拒绝图片uri",
+        "type": "string",
+        "description": "审核拒绝图片uri",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].material_reject[].image_material[].height",
+        "field": "height",
+        "label": "审核拒绝图片高度",
+        "type": "number",
+        "description": "审核拒绝图片高度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].material_reject[].image_material[].width",
+        "field": "width",
+        "label": "审核拒绝图片宽度",
+        "type": "number",
+        "description": "审核拒绝图片宽度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.list[].material_reject[].reject_reason[]",
+        "field": "reject_reason",
+        "label": "拒绝理由",
+        "type": "string[]",
+        "description": "拒绝理由",
+        "display": "default"
+      },
+      {
+        "path": "data.list[].material_reject[].suggestion[]",
+        "field": "suggestion",
+        "label": "审核建议",
+        "type": "string[]",
+        "description": "审核建议",
+        "display": "default"
+      },
+      {
+        "path": "request_id",
+        "field": "request_id",
+        "label": "请求日志id",
+        "type": "string",
+        "description": "请求日志id",
+        "display": "diagnostic"
+      }
+    ]
+  },
+  "mcp_tool_name": "localPromotionRejectReasonBatchGet",
+  "match_tokens": [
+    "local",
+    "promotion",
+    "reject",
+    "reason",
+    "批量获取广告审核建议"
+  ],
+  "required": [
+    "local_account_id",
+    "promotion_ids"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "promotion_ids": "单元ID列表"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "promotion_ids": {
+      "type": "array",
+      "min_items": 1,
+      "max_items": 10
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": []
+}

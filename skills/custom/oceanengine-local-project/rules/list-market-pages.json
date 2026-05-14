@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "name": "list-market-pages",
+  "title": "获取可用营销页列表",
+  "operation_type": "read",
+  "path": "/open_api/v3.0/local/market_page_list/get/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localMarketPageListGet",
+    "match_tokens": [
+      "local",
+      "market_page_list",
+      "获取可用营销页列表"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": false,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "delivery_goal",
+      "label": "投放内容",
+      "type": "string",
+      "enum": [
+        "POI",
+        "PRODUCT"
+      ],
+      "enum_labels": {
+        "POI": "门店",
+        "PRODUCT": "商品"
+      },
+      "required": true
+    },
+    {
+      "name": "poi_ids",
+      "label": "门店ID列表",
+      "type": "array",
+      "min_items": 1,
+      "required": false
+    },
+    {
+      "name": "product_ids",
+      "label": "商品ID列表",
+      "type": "array",
+      "min_items": 1,
+      "required": false
+    },
+    {
+      "name": "page",
+      "label": "页码",
+      "type": "integer",
+      "min": 1,
+      "required": false
+    },
+    {
+      "name": "page_size",
+      "label": "每页数量",
+      "type": "integer",
+      "min": 1,
+      "max": 100,
+      "required": false
+    }
+  ],
+  "constraints": [
+    {
+      "type": "conditional_required",
+      "when": {
+        "delivery_goal": "POI"
+      },
+      "fields": [
+        "poi_ids"
+      ],
+      "message": "投放内容为门店时必须填写门店ID列表"
+    },
+    {
+      "type": "conditional_required",
+      "when": {
+        "delivery_goal": "PRODUCT"
+      },
+      "fields": [
+        "product_ids"
+      ],
+      "message": "投放内容为商品时必须填写商品ID列表"
+    }
+  ],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "delivery_goal",
+      "poi_ids",
+      "product_ids",
+      "page",
+      "page_size"
+    ],
+    "response_fields": [
+      {
+        "path": "data.mark_page_id_list[].market_page_id",
+        "label": "营销页ID"
+      },
+      {
+        "path": "data.mark_page_id_list[].market_page_name",
+        "label": "营销页名称"
+      },
+      {
+        "path": "data.mark_page_id_list[].status",
+        "label": "营销页状态",
+        "value_labels": {
+          "MARKET_PAGE_DISABLE": "不可用",
+          "MARKET_PAGE_ENABLE": "可用"
+        }
+      },
+      {
+        "path": "data.mark_page_id_list[].tool_pack_info.tool_pack_id",
+        "label": "关联留资组件ID"
+      },
+      {
+        "path": "data.mark_page_id_list[].tool_pack_info.tool_pack_types[]",
+        "label": "关联留资方式",
+        "value_labels": {
+          "TOOL_TYPE_CONSULT": "私信咨询",
+          "TOOL_TYPE_FORM": "表单预约",
+          "TOOL_TYPE_PHONE_SMART": "电话咨询"
+        }
+      },
+      {
+        "path": "data.page_info.page",
+        "label": "页码"
+      },
+      {
+        "path": "data.page_info.page_size",
+        "label": "页面大小"
+      },
+      {
+        "path": "data.page_info.total_number",
+        "label": "总数"
+      },
+      {
+        "path": "data.page_info.total_page",
+        "label": "总页数"
+      },
+      {
+        "path": "request_id",
+        "label": "请求日志id",
+        "display": "diagnostic"
+      }
+    ]
+  },
+  "mcp_tool_name": "localMarketPageListGet",
+  "match_tokens": [
+    "local",
+    "market_page_list",
+    "获取可用营销页列表"
+  ],
+  "required": [
+    "local_account_id",
+    "delivery_goal"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "delivery_goal": "投放内容",
+    "poi_ids": "门店ID列表",
+    "product_ids": "商品ID列表",
+    "page": "页码",
+    "page_size": "每页数量"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "delivery_goal": {
+      "type": "string",
+      "enum": [
+        "POI",
+        "PRODUCT"
+      ],
+      "enum_labels": {
+        "POI": "门店",
+        "PRODUCT": "商品"
+      }
+    },
+    "poi_ids": {
+      "type": "array",
+      "min_items": 1
+    },
+    "product_ids": {
+      "type": "array",
+      "min_items": 1
+    },
+    "page": {
+      "type": "integer",
+      "min": 1
+    },
+    "page_size": {
+      "type": "integer",
+      "min": 1,
+      "max": 100
+    }
+  },
+  "conditional_required": [
+    {
+      "when": {
+        "delivery_goal": "POI"
+      },
+      "fields": [
+        "poi_ids"
+      ],
+      "message": "投放内容为门店时必须填写门店ID列表"
+    },
+    {
+      "when": {
+        "delivery_goal": "PRODUCT"
+      },
+      "fields": [
+        "product_ids"
+      ],
+      "message": "投放内容为商品时必须填写商品ID列表"
+    }
+  ],
+  "forbidden_when": []
+}

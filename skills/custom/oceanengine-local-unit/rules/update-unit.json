@@ -1,0 +1,364 @@
+{
+  "schema_version": 1,
+  "name": "update-unit",
+  "title": "更新单元",
+  "operation_type": "mutation",
+  "path": "/open_api/v3.0/local/promotion/update/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localUnitUpdate",
+    "match_tokens": [
+      "local",
+      "promotion",
+      "update",
+      "更新单元"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": true,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "promotion_id",
+      "label": "单元ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "name",
+      "label": "单元名称",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "aweme_id",
+      "label": "抖音号ID",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "enable_graphic_delivery",
+      "label": "是否开启图文投放",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "name": "live_material_type",
+      "label": "直播素材类型",
+      "type": "string",
+      "enum": [
+        "LIVE",
+        "VIDEO"
+      ],
+      "enum_labels": {
+        "LIVE": "直播间",
+        "VIDEO": "视频"
+      },
+      "required": false
+    },
+    {
+      "name": "customer_material_list",
+      "label": "自定义素材列表",
+      "type": "array",
+      "required": false
+    },
+    {
+      "name": "procedural_material",
+      "label": "程序化素材",
+      "type": "object",
+      "required": false
+    },
+    {
+      "name": "promotion_card_info",
+      "label": "单元卡片信息",
+      "type": "object",
+      "required": false
+    },
+    {
+      "name": "video_hp_visibility",
+      "label": "视频主页可见性",
+      "type": "string",
+      "enum": [
+        "ALWAYS_VISIBLE",
+        "HIDE_VIDEO_ON_HP"
+      ],
+      "enum_labels": {
+        "ALWAYS_VISIBLE": "一直可见",
+        "HIDE_VIDEO_ON_HP": "主页隐藏"
+      },
+      "required": false
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "promotion_id"
+    ],
+    "response_fields": [
+      {
+        "path": "code",
+        "field": "code",
+        "label": "返回码",
+        "type": "number",
+        "description": "返回码,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "message",
+        "field": "message",
+        "label": "返回信息",
+        "type": "string",
+        "description": "返回信息,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data",
+        "field": "data",
+        "label": "返回数据",
+        "type": "json",
+        "description": "返回数据",
+        "display": "diagnostic"
+      },
+      {
+        "path": "request_id",
+        "field": "request_id",
+        "label": "请求日志id",
+        "type": "string",
+        "description": "请求日志id",
+        "display": "diagnostic"
+      }
+    ]
+  },
+  "mcp_tool_name": "localUnitUpdate",
+  "match_tokens": [
+    "local",
+    "promotion",
+    "update",
+    "更新单元"
+  ],
+  "required": [
+    "local_account_id",
+    "promotion_id"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "promotion_id": "单元ID",
+    "name": "单元名称",
+    "aweme_id": "抖音号ID",
+    "enable_graphic_delivery": "是否开启图文投放",
+    "live_material_type": "直播素材类型",
+    "customer_material_list": "自定义素材列表",
+    "customer_material_list[].image_mode": "自定义素材类型",
+    "customer_material_list[].title_material.title": "自定义素材标题",
+    "customer_material_list[].video_material.video_id": "自定义素材视频ID",
+    "customer_material_list[].video_material.cover_web_uri": "自定义素材封面URI",
+    "procedural_material": "程序化素材",
+    "procedural_material.title_material_list": "程序化标题素材列表",
+    "procedural_material.title_material_list[].title": "程序化标题素材",
+    "procedural_material.video_material_list": "程序化视频素材列表",
+    "procedural_material.video_material_list[].image_mode": "程序化视频素材类型",
+    "procedural_material.video_material_list[].video_id": "程序化视频ID",
+    "procedural_material.video_material_list[].cover_web_uri": "程序化视频封面URI",
+    "promotion_card_info": "单元卡片信息",
+    "promotion_card_info.product_name": "卡片商品名称",
+    "promotion_card_info.product_images": "卡片商品图片",
+    "promotion_card_info.product_selling_points": "卡片卖点",
+    "promotion_card_info.call_to_actions": "卡片行动号召",
+    "video_hp_visibility": "主页视频是否可见",
+    "customer_material_list[].title_material": "自定义素材标题素材",
+    "customer_material_list[].video_material": "自定义素材视频素材",
+    "customer_material_list[].video_material.aweme_item_id": "抖音短视频ID",
+    "procedural_material.video_material_list[].is_ff_see_setting": "视频主页可见性",
+    "procedural_material.carousel_material_list": "图文素材列表",
+    "procedural_material.carousel_material_list[].carousel_id": "图文素材ID",
+    "promotion_card_info.product_images[].image_uri": "卡片配图URI",
+    "promotion_card_info.product_selling_points[].selling_point": "投放卖点",
+    "promotion_card_info.call_to_actions[].action": "行动号召",
+    "promotion_card_info.enable_personal_call_to_action": "是否开启智能生成行动号召"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "promotion_id": {
+      "type": "number"
+    },
+    "name": {
+      "type": "string",
+      "min_length": 1,
+      "max_length": 50
+    },
+    "aweme_id": {
+      "type": "string"
+    },
+    "enable_graphic_delivery": {
+      "type": "boolean"
+    },
+    "live_material_type": {
+      "type": "string",
+      "enum": [
+        "LIVE",
+        "VIDEO"
+      ],
+      "enum_labels": {
+        "LIVE": "直播间",
+        "VIDEO": "视频"
+      }
+    },
+    "customer_material_list": {
+      "type": "array",
+      "min_items": 1
+    },
+    "customer_material_list[].image_mode": {
+      "type": "string",
+      "enum": [
+        "IMAGE_MODE_VIDEO",
+        "IMAGE_MODE_VIDEO_VERTICAL"
+      ],
+      "enum_labels": {
+        "IMAGE_MODE_VIDEO": "横版视频",
+        "IMAGE_MODE_VIDEO_VERTICAL": "竖版视频"
+      }
+    },
+    "customer_material_list[].title_material.title": {
+      "type": "string",
+      "min_length": 5,
+      "max_length": 55
+    },
+    "customer_material_list[].video_material.video_id": {
+      "type": "string"
+    },
+    "customer_material_list[].video_material.cover_web_uri": {
+      "type": "string"
+    },
+    "customer_material_list[].video_material.aweme_item_id": {
+      "type": "number"
+    },
+    "procedural_material": {
+      "type": "object"
+    },
+    "procedural_material.title_material_list": {
+      "type": "array",
+      "min_items": 1
+    },
+    "procedural_material.title_material_list[].title": {
+      "type": "string",
+      "min_length": 1,
+      "max_length": 30
+    },
+    "procedural_material.video_material_list": {
+      "type": "array",
+      "min_items": 1
+    },
+    "procedural_material.video_material_list[].image_mode": {
+      "type": "string",
+      "enum": [
+        "IMAGE_MODE_VIDEO",
+        "IMAGE_MODE_VIDEO_VERTICAL"
+      ],
+      "enum_labels": {
+        "IMAGE_MODE_VIDEO": "横版视频",
+        "IMAGE_MODE_VIDEO_VERTICAL": "竖版视频"
+      }
+    },
+    "procedural_material.video_material_list[].video_id": {
+      "type": "string"
+    },
+    "procedural_material.video_material_list[].cover_web_uri": {
+      "type": "string"
+    },
+    "procedural_material.video_material_list[].is_ff_see_setting": {
+      "type": "string",
+      "enum": [
+        "ALWAYS_VISIBLE",
+        "HIDE_VIDEO_ON_HP"
+      ],
+      "enum_labels": {
+        "ALWAYS_VISIBLE": "抖音主页可见",
+        "HIDE_VIDEO_ON_HP": "抖音主页单次可见"
+      }
+    },
+    "promotion_card_info": {
+      "type": "object"
+    },
+    "promotion_card_info.product_name": {
+      "type": "string",
+      "min_length": 1,
+      "max_length": 20
+    },
+    "promotion_card_info.product_images": {
+      "type": "array",
+      "min_items": 1,
+      "max_items": 10
+    },
+    "promotion_card_info.product_images[].image_uri": {
+      "type": "string"
+    },
+    "promotion_card_info.product_selling_points": {
+      "type": "array",
+      "min_items": 1,
+      "max_items": 10
+    },
+    "promotion_card_info.product_selling_points[].selling_point": {
+      "type": "string",
+      "min_length": 4,
+      "max_length": 10
+    },
+    "promotion_card_info.call_to_actions": {
+      "type": "array",
+      "min_items": 1,
+      "max_items": 10
+    },
+    "promotion_card_info.call_to_actions[].action": {
+      "type": "string",
+      "min_length": 2,
+      "max_length": 4
+    },
+    "promotion_card_info.enable_personal_call_to_action": {
+      "type": "boolean"
+    },
+    "video_hp_visibility": {
+      "type": "string",
+      "enum": [
+        "ALWAYS_VISIBLE",
+        "HIDE_VIDEO_ON_HP"
+      ],
+      "enum_labels": {
+        "ALWAYS_VISIBLE": "抖音主页可见",
+        "HIDE_VIDEO_ON_HP": "抖音主页单次可见"
+      }
+    },
+    "customer_material_list[].title_material": {
+      "type": "object"
+    },
+    "customer_material_list[].video_material": {
+      "type": "object"
+    },
+    "procedural_material.carousel_material_list": {
+      "type": "array",
+      "min_items": 1,
+      "max_items": 10
+    },
+    "procedural_material.carousel_material_list[].carousel_id": {
+      "type": "number"
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": [],
+  "mcp_wrap_request": true,
+  "confirmation": {
+    "enabled": true,
+    "query_capability": "get-unit-detail",
+    "max_retries": 3,
+    "mode": "unit_detail"
+  }
+}

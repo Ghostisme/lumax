@@ -1,0 +1,299 @@
+{
+  "schema_version": 1,
+  "name": "list-consult-awemes",
+  "title": "获取私信接待抖音号",
+  "operation_type": "read",
+  "path": "/open_api/v3.0/local/consult_awame_list/get/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localImAccountGet",
+    "match_tokens": [
+      "local",
+      "consult_awame",
+      "获取私信接待抖音号"
+    ],
+    "field_map": {
+      "local_account_id": "localAccountId",
+      "filtering.search_key_word": "searchKeyWord",
+      "filtering.auth_type": "authType"
+    },
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": false,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "delivery_goal",
+      "label": "投放内容",
+      "type": "string",
+      "enum": [
+        "POI",
+        "PRODUCT"
+      ],
+      "enum_labels": {
+        "POI": "门店",
+        "PRODUCT": "商品"
+      },
+      "required": true
+    },
+    {
+      "name": "poi_ids",
+      "label": "门店ID列表",
+      "type": "array",
+      "max_items": 10000,
+      "required": false
+    },
+    {
+      "name": "product_ids",
+      "label": "商品ID列表",
+      "type": "array",
+      "max_items": 10,
+      "required": false
+    },
+    {
+      "name": "filtering",
+      "label": "过滤器",
+      "type": "object",
+      "required": false
+    },
+    {
+      "name": "filtering.search_key_word",
+      "label": "抖音号搜索关键词",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "filtering.auth_type",
+      "label": "抖音号授权类型",
+      "type": "array",
+      "item_type": "string",
+      "item_enum": [
+        "OFFICIAL",
+        "SELF"
+      ],
+      "enum_labels": {
+        "OFFICIAL": "官方",
+        "SELF": "自运营"
+      },
+      "required": false
+    },
+    {
+      "name": "auth_type",
+      "label": "抖音号授权类型",
+      "type": "array",
+      "item_type": "string",
+      "item_enum": [
+        "OFFICIAL",
+        "SELF"
+      ],
+      "enum_labels": {
+        "OFFICIAL": "官方",
+        "SELF": "自运营"
+      },
+      "required": false
+    },
+    {
+      "name": "page",
+      "label": "页码",
+      "type": "integer",
+      "required": false
+    },
+    {
+      "name": "page_size",
+      "label": "每页数量",
+      "type": "integer",
+      "required": false
+    }
+  ],
+  "constraints": [
+    {
+      "type": "conditional_required",
+      "when": {
+        "delivery_goal": "POI"
+      },
+      "fields": [
+        "poi_ids"
+      ],
+      "message": "投放内容为门店时必须填写门店ID列表"
+    },
+    {
+      "type": "conditional_required",
+      "when": {
+        "delivery_goal": "PRODUCT"
+      },
+      "fields": [
+        "product_ids"
+      ],
+      "message": "投放内容为商品时必须填写商品ID列表"
+    }
+  ],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "delivery_goal",
+      "poi_ids",
+      "product_ids",
+      "filtering",
+      "auth_type",
+      "page",
+      "page_size"
+    ],
+    "response_fields": [
+      {
+        "path": "message",
+        "label": "返回信息"
+      },
+      {
+        "path": "data.consult_aweme_list[].consult_aweme_uid",
+        "label": "私信接待抖音号"
+      },
+      {
+        "path": "data.consult_aweme_list[].aweme_name",
+        "label": "抖音号名称"
+      },
+      {
+        "path": "data.consult_aweme_list[].aweme_avatar",
+        "label": "抖音头像"
+      },
+      {
+        "path": "data.consult_aweme_list[].auth_type",
+        "label": "抖音号授权类型",
+        "enum_labels": {
+          "OFFICIAL": "官方",
+          "SELF": "自运营"
+        }
+      },
+      {
+        "path": "data.page_info.page",
+        "label": "页码"
+      },
+      {
+        "path": "data.page_info.page_size",
+        "label": "页面大小"
+      },
+      {
+        "path": "data.page_info.total_number",
+        "label": "总数"
+      },
+      {
+        "path": "data.page_info.total_page",
+        "label": "总页数"
+      }
+    ]
+  },
+  "mcp_tool_name": "localImAccountGet",
+  "match_tokens": [
+    "local",
+    "consult_awame",
+    "获取私信接待抖音号"
+  ],
+  "required": [
+    "local_account_id",
+    "delivery_goal"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "delivery_goal": "投放内容",
+    "poi_ids": "门店ID列表",
+    "product_ids": "商品ID列表",
+    "filtering": "过滤器",
+    "filtering.search_key_word": "抖音号搜索关键词",
+    "filtering.auth_type": "抖音号授权类型",
+    "auth_type": "抖音号授权类型",
+    "page": "页码",
+    "page_size": "每页数量"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "delivery_goal": {
+      "type": "string",
+      "enum": [
+        "POI",
+        "PRODUCT"
+      ],
+      "enum_labels": {
+        "POI": "门店",
+        "PRODUCT": "商品"
+      }
+    },
+    "poi_ids": {
+      "type": "array",
+      "max_items": 10000
+    },
+    "product_ids": {
+      "type": "array",
+      "max_items": 10
+    },
+    "filtering": {
+      "type": "object"
+    },
+    "filtering.search_key_word": {
+      "type": "string"
+    },
+    "filtering.auth_type": {
+      "type": "array",
+      "item_type": "string",
+      "item_enum": [
+        "OFFICIAL",
+        "SELF"
+      ],
+      "enum_labels": {
+        "OFFICIAL": "官方",
+        "SELF": "自运营"
+      }
+    },
+    "auth_type": {
+      "type": "array",
+      "item_type": "string",
+      "item_enum": [
+        "OFFICIAL",
+        "SELF"
+      ],
+      "enum_labels": {
+        "OFFICIAL": "官方",
+        "SELF": "自运营"
+      }
+    },
+    "page": {
+      "type": "integer"
+    },
+    "page_size": {
+      "type": "integer"
+    }
+  },
+  "conditional_required": [
+    {
+      "when": {
+        "delivery_goal": "POI"
+      },
+      "fields": [
+        "poi_ids"
+      ],
+      "message": "投放内容为门店时必须填写门店ID列表"
+    },
+    {
+      "when": {
+        "delivery_goal": "PRODUCT"
+      },
+      "fields": [
+        "product_ids"
+      ],
+      "message": "投放内容为商品时必须填写商品ID列表"
+    }
+  ],
+  "forbidden_when": [],
+  "mcp_field_map": {
+    "local_account_id": "localAccountId",
+    "filtering.search_key_word": "searchKeyWord",
+    "filtering.auth_type": "authType"
+  }
+}

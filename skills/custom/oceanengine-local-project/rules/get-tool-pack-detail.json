@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "name": "get-tool-pack-detail",
+  "title": "获取可用留资组件详情",
+  "operation_type": "read",
+  "path": "/open_api/v3.0/local/tool_pack/detail/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localToolPackDetailGet",
+    "match_tokens": [
+      "local",
+      "tool_pack",
+      "detail",
+      "获取可用留资组件详情"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": false,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "tool_pack_id",
+      "label": "留资组件ID",
+      "type": "number",
+      "min": 1,
+      "max": 9223372036854775807,
+      "required": true
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "tool_pack_id"
+    ],
+    "response_fields": [
+      {
+        "path": "data.tool_pack_info.tool_pack_id",
+        "label": "留资组件ID"
+      },
+      {
+        "path": "data.tool_pack_info.tool_pack_name",
+        "label": "留资组件名称"
+      },
+      {
+        "path": "data.tool_pack_info.tool_pack_types[]",
+        "label": "组件类型",
+        "value_labels": {
+          "TOOL_TYPE_CONSULT": "私信咨询",
+          "TOOL_TYPE_FORM": "表单预约",
+          "TOOL_TYPE_PHONE_SMART": "电话咨询"
+        }
+      },
+      {
+        "path": "data.tool_pack_info.enable",
+        "label": "组件是否可用",
+        "value_labels": {
+          "true": "是",
+          "false": "否"
+        }
+      },
+      {
+        "path": "data.tool_pack_info.enable_intelligent_selection",
+        "label": "是否支持智能优选",
+        "value_labels": {
+          "true": "是",
+          "false": "否"
+        }
+      },
+      {
+        "path": "request_id",
+        "label": "请求日志id",
+        "display": "diagnostic"
+      }
+    ]
+  },
+  "mcp_tool_name": "localToolPackDetailGet",
+  "match_tokens": [
+    "local",
+    "tool_pack",
+    "detail",
+    "获取可用留资组件详情"
+  ],
+  "required": [
+    "local_account_id",
+    "tool_pack_id"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "tool_pack_id": "留资组件ID"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "tool_pack_id": {
+      "type": "number",
+      "min": 1,
+      "max": 9223372036854775807
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": []
+}

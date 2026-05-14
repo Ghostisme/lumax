@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "name": "list-promotable-pois",
+  "title": "获取可投门店列表",
+  "operation_type": "read",
+  "path": "/open_api/v3.0/local/poi/get/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localPoiGet",
+    "match_tokens": [
+      "local",
+      "poi",
+      "get",
+      "获取可投门店列表"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": false,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "local_delivery_scene",
+      "label": "营销目的",
+      "type": "string",
+      "enum": [
+        "CONTENT_HEAT",
+        "POI_RECOMMEND",
+        "PRODUCT_PAY",
+        "EXTERNAL"
+      ],
+      "enum_labels": {
+        "CONTENT_HEAT": "线上互动",
+        "POI_RECOMMEND": "线下到店",
+        "PRODUCT_PAY": "团购成交",
+        "EXTERNAL": "获取线索"
+      },
+      "required": true
+    },
+    {
+      "name": "page",
+      "label": "页码",
+      "type": "integer",
+      "required": false
+    },
+    {
+      "name": "page_size",
+      "label": "每页数量",
+      "type": "integer",
+      "min": 1,
+      "max": 100,
+      "required": false
+    },
+    {
+      "name": "filtering",
+      "label": "过滤条件",
+      "type": "object",
+      "required": false
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "local_delivery_scene",
+      "page",
+      "page_size",
+      "filtering"
+    ],
+    "response_fields": [
+      {
+        "path": "message",
+        "label": "返回信息"
+      },
+      {
+        "path": "data.poi_list[].poi_id",
+        "label": "门店ID"
+      },
+      {
+        "path": "data.poi_list[].poi_name",
+        "label": "门店名称"
+      },
+      {
+        "path": "data.poi_list[].province",
+        "label": "所在省份"
+      },
+      {
+        "path": "data.poi_list[].city",
+        "label": "所在城市"
+      },
+      {
+        "path": "data.poi_list[].district",
+        "label": "所在区"
+      },
+      {
+        "path": "data.poi_list[].poi_address",
+        "label": "门店地址"
+      },
+      {
+        "path": "data.poi_list[].exists_product",
+        "label": "门店下有无商品"
+      },
+      {
+        "path": "data.page_info.page",
+        "label": "页码"
+      },
+      {
+        "path": "data.page_info.page_size",
+        "label": "页面大小"
+      },
+      {
+        "path": "data.page_info.total_number",
+        "label": "总数"
+      },
+      {
+        "path": "data.page_info.total_page",
+        "label": "总页数"
+      }
+    ]
+  },
+  "mcp_tool_name": "localPoiGet",
+  "mcp_field_map": {
+    "filtering.search_key_word": "searchKeyWord",
+    "filtering.province": "province",
+    "filtering.city": "city",
+    "filtering.product_id": "productId"
+  },
+  "match_tokens": [
+    "local",
+    "poi",
+    "get",
+    "获取可投门店列表"
+  ],
+  "required": [
+    "local_account_id",
+    "local_delivery_scene"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "local_delivery_scene": "营销目的",
+    "page": "页码",
+    "page_size": "每页数量",
+    "filtering": "过滤条件"
+    ,
+    "filtering.search_key_word": "门店名称或门店ID",
+    "filtering.province": "省份ID",
+    "filtering.city": "城市ID",
+    "filtering.product_id": "商品ID"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "local_delivery_scene": {
+      "type": "string",
+      "enum": [
+        "CONTENT_HEAT",
+        "POI_RECOMMEND",
+        "PRODUCT_PAY",
+        "EXTERNAL"
+      ],
+      "enum_labels": {
+        "CONTENT_HEAT": "线上互动",
+        "POI_RECOMMEND": "线下到店",
+        "PRODUCT_PAY": "团购成交",
+        "EXTERNAL": "获取线索"
+      }
+    },
+    "page": {
+      "type": "integer",
+      "min": 1
+    },
+    "page_size": {
+      "type": "integer",
+      "min": 1,
+      "max": 100
+    },
+    "filtering": {
+      "type": "object"
+    },
+    "filtering.search_key_word": {
+      "type": "string"
+    },
+    "filtering.province": {
+      "type": "array",
+      "item_type": "number"
+    },
+    "filtering.city": {
+      "type": "array",
+      "item_type": "number"
+    },
+    "filtering.product_id": {
+      "type": "number"
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": []
+}

@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "name": "upload-video",
+  "title": "上传视频",
+  "operation_type": "mutation",
+  "path": "/open_api/v3.0/local/file/video/upload/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localFileVideoUpload",
+    "match_tokens": [
+      "local",
+      "file",
+      "video",
+      "upload",
+      "上传视频"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": true,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推账号ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "filename",
+      "label": "视频文件名",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "video_file_path",
+      "label": "视频文件路径",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "video_file_size_bytes",
+      "label": "视频文件大小",
+      "type": "integer",
+      "required": false
+    }
+  ],
+  "constraints": [
+    {
+      "type": "regex",
+      "field": "video_file_path",
+      "pattern": "^/.*\\.(mp4|mpeg|3gp|avi)$",
+      "message": "必须是用户明确提供的绝对路径，扩展名仅支持 mp4、mpeg、3gp、avi"
+    }
+  ],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "filename",
+      "video_file_path"
+    ],
+    "response_fields": [
+      {
+        "path": "code",
+        "field": "code",
+        "label": "返回码",
+        "type": "number",
+        "description": "返回码,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "message",
+        "field": "message",
+        "label": "返回信息",
+        "type": "string",
+        "description": "返回信息,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data",
+        "field": "data",
+        "label": "json返回值",
+        "type": "json",
+        "description": "json返回值",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_id",
+        "field": "video_id",
+        "label": "视频ID",
+        "type": "string",
+        "description": "视频ID",
+        "display": "default"
+      },
+      {
+        "path": "data.size",
+        "field": "size",
+        "label": "视频大小",
+        "type": "number",
+        "description": "视频大小",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.width",
+        "field": "width",
+        "label": "视频宽度",
+        "type": "number",
+        "description": "视频宽度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.height",
+        "field": "height",
+        "label": "视频高度",
+        "type": "number",
+        "description": "视频高度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_url",
+        "field": "video_url",
+        "label": "视频地址",
+        "type": "string",
+        "description": "视频地址",
+        "display": "default"
+      },
+      {
+        "path": "data.duration",
+        "field": "duration",
+        "label": "视频时长",
+        "type": "double",
+        "description": "视频时长",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.material_id",
+        "field": "material_id",
+        "label": "素材id",
+        "type": "number",
+        "description": "素材id，即多合一报表中的素材id，一个素材唯一对应一个素材id",
+        "display": "default"
+      },
+      {
+        "path": "data.video_signature",
+        "field": "video_signature",
+        "label": "视频md5值",
+        "type": "string",
+        "description": "视频md5值",
+        "display": "diagnostic"
+      },
+      {
+        "path": "request_id",
+        "field": "request_id",
+        "label": "请求日志id",
+        "type": "string",
+        "description": "请求日志id",
+        "display": "diagnostic"
+      }
+    ]
+  },
+  "mcp_tool_name": "localFileVideoUpload",
+  "match_tokens": [
+    "local",
+    "file",
+    "video",
+    "upload",
+    "上传视频"
+  ],
+  "required": [
+    "local_account_id",
+    "filename",
+    "video_file_path"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推账号ID",
+    "filename": "视频文件名",
+    "video_file_path": "视频文件路径",
+    "video_file_size_bytes": "视频文件大小"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "filename": {
+      "type": "string",
+      "min_length": 1,
+      "max_length": 255
+    },
+    "video_file_path": {
+      "type": "string"
+    },
+    "video_file_size_bytes": {
+      "type": "integer",
+      "min": 1,
+      "max": 1048576000
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": [],
+  "mcp_wrap_request": true
+}

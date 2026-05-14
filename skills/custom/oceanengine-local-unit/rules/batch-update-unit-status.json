@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "name": "batch-update-unit-status",
+  "title": "批量更新单元状态",
+  "operation_type": "batch",
+  "path": "/open_api/v3.0/local/promotion/status/update/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localUnitStatusBatchUpdate",
+    "match_tokens": [
+      "local",
+      "promotion",
+      "status",
+      "update",
+      "批量更新单元状态"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": true,
+    "batch_field": "data"
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "data",
+      "label": "批量单元状态列表",
+      "type": "array",
+      "min_items": 1,
+      "max_items": 50,
+      "required": true
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "data"
+    ],
+    "response_fields": [
+      {
+        "path": "code",
+        "field": "code",
+        "label": "返回码",
+        "type": "number",
+        "description": "返回码,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "message",
+        "field": "message",
+        "label": "返回信息",
+        "type": "string",
+        "description": "返回信息,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data",
+        "field": "data",
+        "label": "json返回值",
+        "type": "json",
+        "description": "json返回值",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_ids[]",
+        "field": "promotion_ids",
+        "label": "更新成功的单元ID",
+        "type": "number[]",
+        "description": "更新成功的单元ID",
+        "display": "default"
+      },
+      {
+        "path": "data.errors[]",
+        "field": "errors",
+        "label": "更新失败的单元列表",
+        "type": "object[]",
+        "description": "更新失败的单元列表",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.errors[].promotion_id",
+        "field": "promotion_id",
+        "label": "单元ID",
+        "type": "number",
+        "description": "单元ID",
+        "display": "default"
+      },
+      {
+        "path": "data.errors[].error_message",
+        "field": "error_message",
+        "label": "失败信息",
+        "type": "string",
+        "description": "失败信息",
+        "display": "default"
+      },
+      {
+        "path": "request_id",
+        "field": "request_id",
+        "label": "请求日志id",
+        "type": "string",
+        "description": "请求日志id",
+        "display": "diagnostic"
+      }
+    ]
+  },
+  "mcp_tool_name": "localUnitStatusBatchUpdate",
+  "match_tokens": [
+    "local",
+    "promotion",
+    "status",
+    "update",
+    "批量更新单元状态"
+  ],
+  "required": [
+    "local_account_id",
+    "data"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "data": "批量单元状态列表"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "data": {
+      "type": "array",
+      "min_items": 1,
+      "max_items": 50
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": [],
+  "mcp_value_maps": {},
+  "mcp_wrap_request": true,
+  "mcp_batch_field": "data",
+  "batch_field": "data",
+  "batch_item": {
+    "required": [
+      "promotion_id",
+      "opt_status"
+    ],
+    "field_labels": {
+      "promotion_id": "单元ID",
+      "opt_status": "目标操作"
+    },
+    "fields": {
+      "promotion_id": {
+        "type": "number"
+      },
+      "opt_status": {
+        "type": "string",
+        "enum": [
+          "ENABLE",
+          "PAUSED"
+        ],
+        "enum_labels": {
+          "ENABLE": "启用单元",
+          "PAUSED": "暂停单元"
+        }
+      }
+    }
+  },
+  "batch": {
+    "field": "data",
+    "item_identifier": "promotion_id",
+    "item_schema": {
+      "parameters": [
+        {
+          "name": "promotion_id",
+          "label": "单元ID",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "opt_status",
+          "label": "目标操作",
+          "type": "string",
+          "enum": [
+            "ENABLE",
+            "PAUSED"
+          ],
+          "enum_labels": {
+            "ENABLE": "启用单元",
+            "PAUSED": "暂停单元"
+          },
+          "required": true
+        }
+      ],
+      "constraints": []
+    }
+  },
+  "confirmation": {
+    "enabled": true,
+    "query_capability": "list-units",
+    "max_retries": 3,
+    "mode": "batch_unit_status",
+    "batch_field": "data"
+  }
+}

@@ -1,0 +1,500 @@
+{
+  "schema_version": 1,
+  "name": "list-units",
+  "title": "获取单元列表",
+  "operation_type": "read",
+  "path": "/open_api/v3.0/local/promotion/list/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localUnitList",
+    "match_tokens": [
+      "local",
+      "promotion",
+      "list",
+      "获取单元列表"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": false,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "filtering",
+      "label": "过滤条件",
+      "type": "object",
+      "required": false
+    },
+    {
+      "name": "page",
+      "label": "页码",
+      "type": "integer",
+      "required": false
+    },
+    {
+      "name": "page_size",
+      "label": "每页数量",
+      "type": "integer",
+      "required": false
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "filtering",
+      "page",
+      "page_size"
+    ],
+    "response_fields": [
+      {
+        "path": "code",
+        "field": "code",
+        "label": "返回码",
+        "type": "number",
+        "description": "返回码,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "message",
+        "field": "message",
+        "label": "返回信息",
+        "type": "string",
+        "description": "返回信息,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data",
+        "field": "data",
+        "label": "返回数据",
+        "type": "json",
+        "description": "返回数据",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_list[]",
+        "field": "promotion_list",
+        "label": "营销列表",
+        "type": "object[]",
+        "description": "营销列表",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_list[].project_id",
+        "field": "project_id",
+        "label": "项目ID",
+        "type": "number",
+        "description": "项目ID",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_list[].local_account_id",
+        "field": "local_account_id",
+        "label": "投放账户id",
+        "type": "number",
+        "description": "投放账户id",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_list[].ad_type",
+        "field": "ad_type",
+        "label": "单元类型",
+        "type": "string",
+        "description": "单元类型，枚举值：GENERAL 通投；SEARCHING 搜索",
+        "display": "default"
+      },
+      {
+        "path": "data.promotion_list[].promotion_id",
+        "field": "promotion_id",
+        "label": "单元ID",
+        "type": "number",
+        "description": "单元ID",
+        "display": "default"
+      },
+      {
+        "path": "data.promotion_list[].promotion_name",
+        "field": "promotion_name",
+        "label": "单元名称",
+        "type": "string",
+        "description": "单元名称",
+        "display": "default"
+      },
+      {
+        "path": "data.promotion_list[].promotion_create_time",
+        "field": "promotion_create_time",
+        "label": "单元创建时间",
+        "type": "string",
+        "description": "单元创建时间，格式 yyyy-MM-dd HH:mm:ss",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_list[].promotion_modify_time",
+        "field": "promotion_modify_time",
+        "label": "单元更新时间",
+        "type": "string",
+        "description": "单元更新时间，格式 yyyy-MM-dd HH:mm:ss",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_list[].promotion_status_first",
+        "field": "promotion_status_first",
+        "label": "单元一级状态",
+        "type": "string",
+        "description": "单元一级状态",
+        "display": "default"
+      },
+      {
+        "path": "data.promotion_list[].promotion_status_second[]",
+        "field": "promotion_status_second",
+        "label": "单元二级状态",
+        "type": "string[]",
+        "description": "单元二级状态",
+        "display": "default"
+      },
+      {
+        "path": "data.promotion_list[].learning_phase",
+        "field": "learning_phase",
+        "label": "学习期状态",
+        "type": "string",
+        "description": "学习期状态，枚举值：LEARNED 学习期结束；LEARNING 学习中；LEARN_FAILED 学习失败",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_list[].aweme_id",
+        "field": "aweme_id",
+        "label": "抖音号",
+        "type": "string",
+        "description": "抖音号",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.promotion_list[].aweme_name",
+        "field": "aweme_name",
+        "label": "抖音号昵称",
+        "type": "string",
+        "description": "抖音号昵称",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.page_info",
+        "field": "page_info",
+        "label": "分页信息",
+        "type": "object",
+        "description": "分页信息",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.page_info.page",
+        "field": "page",
+        "label": "页码",
+        "type": "number",
+        "description": "页码",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.page_info.page_size",
+        "field": "page_size",
+        "label": "页面大小",
+        "type": "number",
+        "description": "页面大小",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.page_info.total_number",
+        "field": "total_number",
+        "label": "总数",
+        "type": "number",
+        "description": "总数",
+        "display": "default"
+      },
+      {
+        "path": "data.page_info.total_page",
+        "field": "total_page",
+        "label": "总页数",
+        "type": "number",
+        "description": "总页数",
+        "display": "diagnostic"
+      },
+      {
+        "path": "request_id",
+        "field": "request_id",
+        "label": "请求日志id",
+        "type": "string",
+        "description": "请求日志id",
+        "display": "diagnostic"
+      }
+    ]
+  },
+  "mcp_tool_name": "localUnitList",
+  "match_tokens": [
+    "local",
+    "promotion",
+    "list",
+    "获取单元列表"
+  ],
+  "required": [
+    "local_account_id"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "filtering": "过滤条件",
+    "filtering.promotion_ids": "单元ID列表",
+    "filtering.promotion_status_first": "单元一级状态",
+    "filtering.promotion_status_second": "单元二级状态",
+    "filtering.marketing_goal": "营销场景",
+    "filtering.ad_type": "单元类型",
+    "filtering.bid_type": "出价方式",
+    "filtering.budget_mode": "预算类型",
+    "filtering.local_delivery_scene": "营销目的",
+    "filtering.learning_phase": "学习期状态",
+    "filtering.reject_reason_type": "审核建议类型",
+    "page": "页码",
+    "page_size": "每页数量",
+    "filtering.promotion_name": "单元名称",
+    "filtering.project_id": "项目ID",
+    "filtering.promotion_create_time_start": "单元创建开始时间",
+    "filtering.promotion_create_time_end": "单元创建结束时间",
+    "filtering.promotion_modify_time_start": "单元更新开始时间",
+    "filtering.promotion_modify_time_end": "单元更新结束时间"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "filtering": {
+      "type": "object"
+    },
+    "filtering.promotion_ids": {
+      "type": "array"
+    },
+    "filtering.promotion_name": {
+      "type": "string"
+    },
+    "filtering.project_id": {
+      "type": "number"
+    },
+    "filtering.promotion_status_first": {
+      "type": "string",
+      "enum": [
+        "PROMOTION_STATUS_ALL",
+        "PROMOTION_STATUS_DELETED",
+        "PROMOTION_STATUS_DISABLE",
+        "PROMOTION_STATUS_DONE",
+        "PROMOTION_STATUS_ENABLE",
+        "PROMOTION_STATUS_FROZEN",
+        "PROMOTION_STATUS_NOT_DELETE"
+      ],
+      "enum_labels": {
+        "PROMOTION_STATUS_ALL": "不限（包含已删除）",
+        "PROMOTION_STATUS_DELETED": "已删除",
+        "PROMOTION_STATUS_DISABLE": "未投放",
+        "PROMOTION_STATUS_DONE": "已完成",
+        "PROMOTION_STATUS_ENABLE": "投放中",
+        "PROMOTION_STATUS_FROZEN": "已终止",
+        "PROMOTION_STATUS_NOT_DELETE": "不限（不包含已删除）"
+      }
+    },
+    "filtering.promotion_status_second": {
+      "type": "string",
+      "enum": [
+        "AUDIT_DENY",
+        "AUDIT",
+        "REAUDIT",
+        "DISABLED",
+        "DISABLE_BY_QUOTA",
+        "PROJECT_DISABLED",
+        "NO_SCHEDULE",
+        "TIME_NO_REACH",
+        "OFFLINE_BALANCE",
+        "BALANCE_OFFLINE_BUDGET",
+        "PROJECT_OFFLINE_BUDGET",
+        "PROMOTION_OFFLINE_BUDGET",
+        "LIVE_ROOM_OFF",
+        "AWEME_ACCOUNT_DISABLED",
+        "PRODUCT_OR_POI_OFFLINE"
+      ],
+      "enum_labels": {
+        "AUDIT_DENY": "审核不通过",
+        "AUDIT": "新建审核中",
+        "REAUDIT": "修改审核中",
+        "DISABLED": "已暂停",
+        "DISABLE_BY_QUOTA": "配额达限",
+        "PROJECT_DISABLED": "项目已被暂停",
+        "NO_SCHEDULE": "不在投放时段",
+        "TIME_NO_REACH": "未到达投放时间",
+        "OFFLINE_BALANCE": "账户余额不足",
+        "BALANCE_OFFLINE_BUDGET": "账户超出预算",
+        "PROJECT_OFFLINE_BUDGET": "项目超出预算",
+        "PROMOTION_OFFLINE_BUDGET": "单元超出预算",
+        "LIVE_ROOM_OFF": "直播间不可投放",
+        "AWEME_ACCOUNT_DISABLED": "抖音账号不可投放",
+        "PRODUCT_OR_POI_OFFLINE": "商品/门店不可投"
+      }
+    },
+    "filtering.marketing_goal": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "LIVE",
+        "VIDEO_IMAGE"
+      ],
+      "enum_labels": {
+        "ALL": "全部",
+        "LIVE": "直播",
+        "VIDEO_IMAGE": "视频图文"
+      }
+    },
+    "filtering.ad_type": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "GENERAL",
+        "SEARCHING"
+      ],
+      "enum_labels": {
+        "ALL": "全部",
+        "GENERAL": "通投广告",
+        "SEARCHING": "搜索广告"
+      }
+    },
+    "filtering.bid_type": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "MANUAL",
+        "MAX_CONVERSION",
+        "SMART",
+        "STABILIZE_COSTS"
+      ],
+      "enum_labels": {
+        "ALL": "全部",
+        "MANUAL": "手动出价",
+        "MAX_CONVERSION": "最大转化",
+        "SMART": "智能出价",
+        "STABILIZE_COSTS": "稳定成本"
+      }
+    },
+    "filtering.budget_mode": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "BUDGET_MODE_7DAY_TOTAL",
+        "BUDGET_MODE_DAY",
+        "BUDGET_MODE_TOTAL"
+      ],
+      "enum_labels": {
+        "ALL": "全部",
+        "BUDGET_MODE_7DAY_TOTAL": "7天总预算",
+        "BUDGET_MODE_DAY": "日预算",
+        "BUDGET_MODE_TOTAL": "总预算"
+      }
+    },
+    "filtering.local_delivery_scene": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "CONTENT_HEAT",
+        "EXTERNAL",
+        "POI_RECOMMEND",
+        "PRODUCT_PAY"
+      ],
+      "enum_labels": {
+        "ALL": "全部",
+        "CONTENT_HEAT": "线上互动",
+        "EXTERNAL": "销售线索收集",
+        "POI_RECOMMEND": "线下到店",
+        "PRODUCT_PAY": "团购成交"
+      }
+    },
+    "filtering.learning_phase": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "LEARNED",
+        "LEARNING",
+        "LEARN_FAILED"
+      ],
+      "enum_labels": {
+        "ALL": "全部",
+        "LEARNED": "已度过学习期",
+        "LEARNING": "学习中",
+        "LEARN_FAILED": "学习失败"
+      }
+    },
+    "filtering.reject_reason_type": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "DISCOMFORT",
+        "ELSE",
+        "EXAGGERATION",
+        "LOW_MATERAIL",
+        "NONE",
+        "QUALITY_POOR",
+        "REVIEW_REJECT"
+      ],
+      "enum_labels": {
+        "ALL": "全部",
+        "DISCOMFORT": "易引人不适",
+        "ELSE": "其他",
+        "EXAGGERATION": "夸张宣传",
+        "LOW_MATERAIL": "低俗素材",
+        "NONE": "无",
+        "QUALITY_POOR": "质量较差",
+        "REVIEW_REJECT": "审核拒绝"
+      }
+    },
+    "page": {
+      "type": "integer",
+      "min": 1
+    },
+    "page_size": {
+      "type": "integer",
+      "min": 1,
+      "max": 100
+    },
+    "filtering.promotion_create_time_start": {
+      "type": "string"
+    },
+    "filtering.promotion_create_time_end": {
+      "type": "string"
+    },
+    "filtering.promotion_modify_time_start": {
+      "type": "string"
+    },
+    "filtering.promotion_modify_time_end": {
+      "type": "string"
+    }
+  },
+  "conditional_required": [
+    {
+      "when": {
+        "field": "filtering.promotion_status_first",
+        "equals": "PROMOTION_STATUS_DISABLE"
+      },
+      "fields": [
+        "filtering.promotion_status_second"
+      ],
+      "message": "仅当 promotion_status_first=PROMOTION_STATUS_DISABLE 未投放时，单元二级状态有效且必填"
+    }
+  ],
+  "forbidden_when": [
+    {
+      "when": {
+        "field": "filtering.promotion_status_first",
+        "not_equals": "PROMOTION_STATUS_DISABLE"
+      },
+      "fields": [
+        "filtering.promotion_status_second"
+      ],
+      "message": "仅当 promotion_status_first=PROMOTION_STATUS_DISABLE 未投放时才支持传入单元二级状态"
+    }
+  ]
+}

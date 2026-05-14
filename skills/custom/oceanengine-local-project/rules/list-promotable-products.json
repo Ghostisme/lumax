@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "name": "list-promotable-products",
+  "title": "获取可投商品列表",
+  "operation_type": "read",
+  "path": "/open_api/v3.0/local/product/get/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localProductGet",
+    "match_tokens": [
+      "local",
+      "product",
+      "get",
+      "获取可投商品列表"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": false,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "local_delivery_scene",
+      "label": "营销目的",
+      "type": "string",
+      "enum": [
+        "CONTENT_HEAT",
+        "EXTERNAL",
+        "POI_RECOMMEND",
+        "PRODUCT_PAY"
+      ],
+      "enum_labels": {
+        "CONTENT_HEAT": "线上互动",
+        "EXTERNAL": "销售线索收集",
+        "POI_RECOMMEND": "线下到店",
+        "PRODUCT_PAY": "团购成交"
+      },
+      "required": true
+    },
+    {
+      "name": "page",
+      "label": "页码",
+      "type": "integer",
+      "required": false
+    },
+    {
+      "name": "page_size",
+      "label": "每页数量",
+      "type": "integer",
+      "min": 1,
+      "max": 100,
+      "required": false
+    },
+    {
+      "name": "filtering",
+      "label": "过滤条件",
+      "type": "object",
+      "required": false,
+      "fields": {
+        "search_key_word": {
+          "label": "搜索关键词",
+          "type": "string",
+          "required": false
+        }
+      }
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "local_delivery_scene",
+      "page",
+      "page_size",
+      "filtering"
+    ],
+    "response_fields": [
+      {
+        "path": "data.products[].product_id",
+        "label": "商品ID"
+      },
+      {
+        "path": "data.products[].product_name",
+        "label": "商品名称"
+      },
+      {
+        "path": "data.products[].price",
+        "label": "价格"
+      },
+      {
+        "path": "data.products[].product_pics",
+        "label": "商品图片"
+      },
+      {
+        "path": "data.products[].applicable_poi_num",
+        "label": "适用门店数"
+      },
+      {
+        "path": "data.products[].bind_market_page_infos[].market_page_id",
+        "label": "绑定营销页ID"
+      },
+      {
+        "path": "data.page_info.page",
+        "label": "页码"
+      },
+      {
+        "path": "data.page_info.page_size",
+        "label": "页面大小"
+      },
+      {
+        "path": "data.page_info.total_number",
+        "label": "总数"
+      },
+      {
+        "path": "data.page_info.total_page",
+        "label": "总页数"
+      }
+    ]
+  },
+  "mcp_tool_name": "localProductGet",
+  "mcp_field_map": {
+    "filtering.search_key_word": "searchKeyWord"
+  },
+  "match_tokens": [
+    "local",
+    "product",
+    "get",
+    "获取可投商品列表"
+  ],
+  "required": [
+    "local_account_id",
+    "local_delivery_scene"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "local_delivery_scene": "营销目的",
+    "page": "页码",
+    "page_size": "每页数量",
+    "filtering": "过滤条件",
+    "filtering.search_key_word": "搜索关键词"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "local_delivery_scene": {
+      "type": "string",
+      "enum": [
+        "CONTENT_HEAT",
+        "EXTERNAL",
+        "POI_RECOMMEND",
+        "PRODUCT_PAY"
+      ],
+      "enum_labels": {
+        "CONTENT_HEAT": "线上互动",
+        "EXTERNAL": "销售线索收集",
+        "POI_RECOMMEND": "线下到店",
+        "PRODUCT_PAY": "团购成交"
+      }
+    },
+    "page": {
+      "type": "integer",
+      "min": 1
+    },
+    "page_size": {
+      "type": "integer",
+      "min": 1,
+      "max": 100
+    },
+    "filtering": {
+      "type": "object",
+      "fields": {
+        "search_key_word": {
+          "label": "搜索关键词",
+          "type": "string"
+        }
+      }
+    },
+    "filtering.search_key_word": {
+      "type": "string"
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": []
+}

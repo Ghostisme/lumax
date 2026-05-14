@@ -1,0 +1,429 @@
+{
+  "schema_version": 1,
+  "name": "list-projects",
+  "title": "获取项目列表",
+  "operation_type": "read",
+  "path": "/open_api/v3.0/local/project/list/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localProjectList",
+    "match_tokens": [
+      "local",
+      "project",
+      "list",
+      "获取项目列表"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": false,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "project_ids",
+      "label": "项目ID列表",
+      "type": "array",
+      "required": false
+    },
+    {
+      "name": "page",
+      "label": "页码",
+      "type": "integer",
+      "required": false
+    },
+    {
+      "name": "page_size",
+      "label": "每页数量",
+      "type": "integer",
+      "required": false
+    },
+    {
+      "name": "filtering",
+      "label": "过滤条件",
+      "type": "object",
+      "required": false
+    },
+    {
+      "name": "filtering.project_ids",
+      "label": "过滤条件.项目ID列表",
+      "type": "array",
+      "required": false
+    },
+    {
+      "name": "filtering.project_status_first",
+      "label": "过滤条件.项目一级状态",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "filtering.project_status_second",
+      "label": "过滤条件.项目二级状态",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "filtering.shop_ids",
+      "label": "过滤条件.门店ID列表",
+      "type": "array",
+      "required": false
+    },
+    {
+      "name": "filtering.product_ids",
+      "label": "过滤条件.商品ID列表",
+      "type": "array",
+      "required": false
+    },
+    {
+      "name": "filtering.local_delivery_scene",
+      "label": "过滤条件.营销目的",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "filtering.marketing_goal",
+      "label": "过滤条件.营销场景",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "filtering.ad_type",
+      "label": "过滤条件.单元类型",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "filtering.project_name",
+      "label": "过滤条件.项目名称",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "filtering.project_create_time_start",
+      "label": "过滤条件.项目创建开始时间",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "filtering.project_create_time_end",
+      "label": "过滤条件.项目创建结束时间",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "filtering.project_modify_time_start",
+      "label": "过滤条件.项目更新开始时间",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "filtering.project_modify_time_end",
+      "label": "过滤条件.项目更新结束时间",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "filtering.bid_type",
+      "label": "过滤条件.出价方式",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "filtering.delivery_package",
+      "label": "过滤条件.投放类型",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "project_ids",
+      "page",
+      "page_size",
+      "filtering"
+    ],
+    "response_fields": [
+      {
+        "path": "message",
+        "label": "返回信息"
+      },
+      {
+        "path": "data.project_list[].project_id",
+        "label": "项目ID"
+      },
+      {
+        "path": "data.project_list[].name",
+        "label": "项目名称"
+      },
+      {
+        "path": "data.project_list[].project_status_first",
+        "label": "项目一级状态"
+      },
+      {
+        "path": "data.project_list[].project_status_second[]",
+        "label": "项目二级状态"
+      },
+      {
+        "path": "data.project_list[].marketing_goal",
+        "label": "营销场景"
+      },
+      {
+        "path": "data.project_list[].local_delivery_scene",
+        "label": "营销目的"
+      },
+      {
+        "path": "data.project_list[].ad_type",
+        "label": "单元类型"
+      },
+      {
+        "path": "data.project_list[].project_budget",
+        "label": "项目预算"
+      },
+      {
+        "path": "data.project_list[].project_bid",
+        "label": "项目出价"
+      },
+      {
+        "path": "data.project_list[].project_create_time",
+        "label": "项目创建时间"
+      },
+      {
+        "path": "data.project_list[].project_modify_time",
+        "label": "项目更新时间"
+      },
+      {
+        "path": "data.page_info.page",
+        "label": "页码"
+      },
+      {
+        "path": "data.page_info.page_size",
+        "label": "页面大小"
+      },
+      {
+        "path": "data.page_info.total_number",
+        "label": "总数"
+      },
+      {
+        "path": "data.page_info.total_page",
+        "label": "总页数"
+      }
+    ]
+  },
+  "mcp_tool_name": "localProjectList",
+  "match_tokens": [
+    "local",
+    "project",
+    "list",
+    "获取项目列表"
+  ],
+  "required": [
+    "local_account_id"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "project_ids": "项目ID列表",
+    "page": "页码",
+    "page_size": "每页数量",
+    "filtering": "过滤条件",
+    "filtering.project_ids": "过滤条件.项目ID列表",
+    "filtering.project_status_first": "过滤条件.项目一级状态",
+    "filtering.project_status_second": "过滤条件.项目二级状态",
+    "filtering.shop_ids": "过滤条件.门店ID列表",
+    "filtering.product_ids": "过滤条件.商品ID列表",
+    "filtering.local_delivery_scene": "过滤条件.营销目的",
+    "filtering.marketing_goal": "过滤条件.营销场景",
+    "filtering.ad_type": "过滤条件.单元类型",
+    "filtering.project_name": "过滤条件.项目名称",
+    "filtering.project_create_time_start": "过滤条件.项目创建开始时间",
+    "filtering.project_create_time_end": "过滤条件.项目创建结束时间",
+    "filtering.project_modify_time_start": "过滤条件.项目更新开始时间",
+    "filtering.project_modify_time_end": "过滤条件.项目更新结束时间",
+    "filtering.bid_type": "过滤条件.出价方式",
+    "filtering.delivery_package": "过滤条件.投放类型"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "project_ids": {
+      "type": "array",
+      "item_type": "number"
+    },
+    "page": {
+      "type": "integer",
+      "min": 1
+    },
+    "page_size": {
+      "type": "integer",
+      "min": 1
+    },
+    "filtering": {
+      "type": "object"
+    },
+    "filtering.project_ids": {
+      "type": "array",
+      "item_type": "number",
+      "max_items": 100
+    },
+    "filtering.project_status_first": {
+      "type": "string",
+      "enum": [
+        "PROJECT_STATUS_ALL",
+        "PROJECT_STATUS_DELETE",
+        "PROJECT_STATUS_DISABLE",
+        "PROJECT_STATUS_DONE",
+        "PROJECT_STATUS_ENABLE",
+        "PROJECT_STATUS_NOT_DELETE"
+      ],
+      "enum_labels": {
+        "PROJECT_STATUS_ALL": "不限（包含已删除）",
+        "PROJECT_STATUS_DELETE": "已删除",
+        "PROJECT_STATUS_DISABLE": "未投放",
+        "PROJECT_STATUS_DONE": "已完成",
+        "PROJECT_STATUS_ENABLE": "启用中",
+        "PROJECT_STATUS_NOT_DELETE": "不限（不包含已删除）"
+      }
+    },
+    "filtering.project_status_second": {
+      "type": "string",
+      "enum": [
+        "PROJECT_STATUS_BUDGET_EXCEED",
+        "PROJECT_STATUS_DISABLE",
+        "PROJECT_STATUS_NOT_SCHEDULE",
+        "PROJECT_STATUS_NOT_START"
+      ],
+      "enum_labels": {
+        "PROJECT_STATUS_BUDGET_EXCEED": "项目超出预算",
+        "PROJECT_STATUS_DISABLE": "已暂停",
+        "PROJECT_STATUS_NOT_SCHEDULE": "不在投放时段",
+        "PROJECT_STATUS_NOT_START": "未达投放时间"
+      }
+    },
+    "filtering.shop_ids": {
+      "type": "array",
+      "item_type": "number",
+      "max_items": 10
+    },
+    "filtering.product_ids": {
+      "type": "array",
+      "item_type": "number",
+      "max_items": 10
+    },
+    "filtering.local_delivery_scene": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "CONTENT_HEAT",
+        "POI_RECOMMEND",
+        "PRODUCT_PAY",
+        "EXTERNAL"
+      ],
+      "enum_labels": {
+        "ALL": "不限",
+        "CONTENT_HEAT": "线上互动",
+        "POI_RECOMMEND": "线下到店",
+        "PRODUCT_PAY": "团购成交",
+        "EXTERNAL": "获取线索"
+      }
+    },
+    "filtering.marketing_goal": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "LIVE",
+        "VIDEO_IMAGE"
+      ],
+      "enum_labels": {
+        "ALL": "不限",
+        "LIVE": "直播",
+        "VIDEO_IMAGE": "短视频/图文"
+      }
+    },
+    "filtering.ad_type": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "GENERAL",
+        "SEARCHING"
+      ],
+      "enum_labels": {
+        "ALL": "不限",
+        "GENERAL": "通投",
+        "SEARCHING": "搜索"
+      }
+    },
+    "filtering.project_name": {
+      "type": "string"
+    },
+    "filtering.project_create_time_start": {
+      "type": "string"
+    },
+    "filtering.project_create_time_end": {
+      "type": "string"
+    },
+    "filtering.project_modify_time_start": {
+      "type": "string"
+    },
+    "filtering.project_modify_time_end": {
+      "type": "string"
+    },
+    "filtering.bid_type": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "MANUAL",
+        "SMART",
+        "STABILIZE_COSTS",
+        "MAX_CONVERSION"
+      ],
+      "enum_labels": {
+        "ALL": "不限",
+        "MANUAL": "手动出价",
+        "SMART": "智能出价",
+        "STABILIZE_COSTS": "稳定成本",
+        "MAX_CONVERSION": "最大转化"
+      }
+    },
+    "filtering.delivery_package": {
+      "type": "string",
+      "enum": [
+        "DELIVERY_PACKAGE_NORMAL",
+        "DELIVERY_PACKAGE_UBL"
+      ],
+      "enum_labels": {
+        "DELIVERY_PACKAGE_NORMAL": "常规投放",
+        "DELIVERY_PACKAGE_UBL": "周期稳投"
+      }
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": [],
+  "mcp_value_maps": {
+    "filtering.projectStatusFirst": {
+      "PROJECT_STATUS_ALL": "ALL",
+      "PROJECT_STATUS_DELETE": "DELETE",
+      "PROJECT_STATUS_DISABLE": "DISABLE",
+      "PROJECT_STATUS_DONE": "DONE",
+      "PROJECT_STATUS_ENABLE": "ENABLE",
+      "PROJECT_STATUS_NOT_DELETE": "NOT_DELETE"
+    },
+    "filtering.projectStatusSecond": {
+      "PROJECT_STATUS_BUDGET_EXCEED": "BUDGET_EXCEED",
+      "PROJECT_STATUS_DISABLE": "DISABLE",
+      "PROJECT_STATUS_NOT_SCHEDULE": "NOT_SCHEDULE",
+      "PROJECT_STATUS_NOT_START": "NOT_START"
+    },
+    "filtering.deliveryPackage": {
+      "DELIVERY_PACKAGE_NORMAL": "NORMAL",
+      "DELIVERY_PACKAGE_UBL": "UBL"
+    }
+  }
+}

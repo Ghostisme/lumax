@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "name": "list-authorized-awemes",
+  "title": "获取本地推创编可用抖音号",
+  "operation_type": "read",
+  "path": "/open_api/v3.0/local/aweme/authorized/get/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localAwemeAuthorizedGet",
+    "match_tokens": [
+      "local",
+      "aweme",
+      "authorized",
+      "获取本地推创编可用抖音号"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": false,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "marketing_goal",
+      "label": "抖音号使用场景",
+      "type": "string",
+      "enum": [
+        "LIVE",
+        "VIDEO_IMAGE"
+      ],
+      "enum_labels": {
+        "LIVE": "直播",
+        "VIDEO_IMAGE": "短视频/图文"
+      },
+      "required": true
+    },
+    {
+      "name": "filtering",
+      "label": "过滤器",
+      "type": "object",
+      "required": false,
+      "fields": [
+        {
+          "name": "search_key_word",
+          "label": "搜索关键词",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "aweme_id",
+      "label": "抖音号",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "page",
+      "label": "页码",
+      "type": "integer",
+      "required": false
+    },
+    {
+      "name": "page_size",
+      "label": "每页数量",
+      "type": "integer",
+      "required": false
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "marketing_goal",
+      "filtering",
+      "aweme_id",
+      "page",
+      "page_size"
+    ],
+    "response_fields": [
+      {
+        "path": "data.aweme_id_list[].aweme_id",
+        "label": "抖音号"
+      },
+      {
+        "path": "data.aweme_id_list[].aweme_name",
+        "label": "抖音号名称"
+      },
+      {
+        "path": "data.aweme_id_list[].aweme_avatar",
+        "label": "抖音头像"
+      },
+      {
+        "path": "data.aweme_id_list[].auth_type",
+        "label": "抖音号授权类型",
+        "enum_labels": {
+          "OFFICIAL": "官方",
+          "SELF": "自运营",
+          "AWEME_COOPERATOR": "合作达人"
+        }
+      },
+      {
+        "path": "data.aweme_id_list[].aweme_has_uni_prom",
+        "label": "该抖音号是否有直播roi2计划投放"
+      },
+      {
+        "path": "data.aweme_id_list[].can_create_roi2_ad",
+        "label": "该抖音号是否能创建roi2单元"
+      },
+      {
+        "path": "data.page_info.page",
+        "label": "页码"
+      },
+      {
+        "path": "data.page_info.page_size",
+        "label": "页面大小"
+      },
+      {
+        "path": "data.page_info.total_number",
+        "label": "总数"
+      },
+      {
+        "path": "data.page_info.total_page",
+        "label": "总页数"
+      }
+    ]
+  },
+  "mcp_tool_name": "localAwemeAuthorizedGet",
+  "mcp_field_map": {
+    "filtering.search_key_word": "searchKeyWord"
+  },
+  "match_tokens": [
+    "local",
+    "aweme",
+    "authorized",
+    "获取本地推创编可用抖音号"
+  ],
+  "required": [
+    "local_account_id",
+    "marketing_goal"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "marketing_goal": "抖音号使用场景",
+    "filtering": "过滤器",
+    "filtering.search_key_word": "搜索关键词",
+    "aweme_id": "抖音号",
+    "page": "页码",
+    "page_size": "每页数量"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "marketing_goal": {
+      "type": "string",
+      "enum": [
+        "LIVE",
+        "VIDEO_IMAGE"
+      ],
+      "enum_labels": {
+        "LIVE": "直播",
+        "VIDEO_IMAGE": "短视频/图文"
+      }
+    },
+    "filtering": {
+      "type": "object",
+      "fields": {
+        "search_key_word": {
+          "type": "string"
+        }
+      }
+    },
+    "filtering.search_key_word": {
+      "type": "string"
+    },
+    "aweme_id": {
+      "type": "string"
+    },
+    "page": {
+      "type": "integer",
+      "min": 1
+    },
+    "page_size": {
+      "type": "integer",
+      "min": 1,
+      "max": 100
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": []
+}

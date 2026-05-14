@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "name": "upload-image",
+  "title": "上传图片素材",
+  "operation_type": "mutation",
+  "path": "/open_api/v3.0/local/image/upload/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localImageUpload",
+    "match_tokens": [
+      "local",
+      "image",
+      "upload",
+      "上传图片素材"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": true,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推账号ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "image_file_path",
+      "label": "图片文件路径",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "image_signature",
+      "label": "图片签名",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "is_aigc",
+      "label": "是否AIGC图片",
+      "type": "boolean",
+      "required": true
+    },
+    {
+      "name": "upload_type",
+      "label": "上传方式",
+      "type": "string",
+      "enum": [
+        "UPLOAD_BY_FILE"
+      ],
+      "enum_labels": {
+        "UPLOAD_BY_FILE": "本地文件上传"
+      },
+      "required": true
+    },
+    {
+      "name": "image_file_size_bytes",
+      "label": "图片文件大小",
+      "type": "integer",
+      "required": false
+    }
+  ],
+  "constraints": [
+    {
+      "type": "regex",
+      "field": "image_file_path",
+      "pattern": "^/.*\\.(jpg|jpeg|png|bmp|gif)$",
+      "message": "必须是用户明确提供的绝对路径，扩展名仅支持 jpg、jpeg、png、bmp、gif"
+    },
+    {
+      "type": "regex",
+      "field": "image_signature",
+      "pattern": "^[A-Fa-f0-9]{32}$",
+      "message": "必须是 32 位 MD5 十六进制字符串"
+    }
+  ],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "image_file_path",
+      "image_signature",
+      "is_aigc",
+      "upload_type"
+    ],
+    "response_fields": [
+      {
+        "path": "code",
+        "field": "code",
+        "label": "返回码",
+        "type": "number",
+        "description": "返回码,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "message",
+        "field": "message",
+        "label": "返回信息",
+        "type": "string",
+        "description": "返回信息,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data",
+        "field": "data",
+        "label": "json返回值",
+        "type": "json",
+        "description": "json返回值",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.id",
+        "field": "id",
+        "label": "图片ID",
+        "type": "string",
+        "description": "图片ID",
+        "display": "default"
+      },
+      {
+        "path": "data.size",
+        "field": "size",
+        "label": "图片大小",
+        "type": "number",
+        "description": "图片大小",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.width",
+        "field": "width",
+        "label": "图片宽度",
+        "type": "number",
+        "description": "图片宽度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.height",
+        "field": "height",
+        "label": "图片高度",
+        "type": "number",
+        "description": "图片高度",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.url",
+        "field": "url",
+        "label": "图片预览地址",
+        "type": "string",
+        "description": "图片预览地址",
+        "display": "default"
+      },
+      {
+        "path": "data.format",
+        "field": "format",
+        "label": "图片格式",
+        "type": "string",
+        "description": "图片格式",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.signature",
+        "field": "signature",
+        "label": "图片md5",
+        "type": "string",
+        "description": "图片md5",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.material_id",
+        "field": "material_id",
+        "label": "素材id",
+        "type": "number",
+        "description": "素材id，即多合一报表中的素材id，一个素材唯一对应一个素材id",
+        "display": "default"
+      },
+      {
+        "path": "request_id",
+        "field": "request_id",
+        "label": "请求日志id",
+        "type": "string",
+        "description": "请求日志id",
+        "display": "diagnostic"
+      }
+    ]
+  },
+  "mcp_tool_name": "localImageUpload",
+  "match_tokens": [
+    "local",
+    "image",
+    "upload",
+    "上传图片素材"
+  ],
+  "required": [
+    "local_account_id",
+    "image_file_path",
+    "image_signature",
+    "is_aigc",
+    "upload_type"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推账号ID",
+    "image_file_path": "图片文件路径",
+    "image_signature": "图片签名",
+    "is_aigc": "是否AIGC图片",
+    "upload_type": "上传方式",
+    "image_file_size_bytes": "图片文件大小"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "image_file_path": {
+      "type": "string"
+    },
+    "image_signature": {
+      "type": "string",
+      "min_length": 32,
+      "max_length": 32
+    },
+    "is_aigc": {
+      "type": "boolean"
+    },
+    "upload_type": {
+      "type": "string",
+      "enum": [
+        "UPLOAD_BY_FILE"
+      ],
+      "enum_labels": {
+        "UPLOAD_BY_FILE": "本地文件上传"
+      }
+    },
+    "image_file_size_bytes": {
+      "type": "integer",
+      "min": 1,
+      "max": 1572864
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": [],
+  "mcp_wrap_request": true
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "skill": "standard-business-skill-template",
+  "capabilities": [
+    {
+      "name": "read-example",
+      "operation_type": "read",
+      "rule": "rules/read-example.json",
+      "reference": "references/read-example.md",
+      "script": "scripts/endpoints/read_example.py"
+    },
+    {
+      "name": "mutation-example",
+      "operation_type": "mutation",
+      "rule": "rules/mutation-example.json",
+      "reference": "references/mutation-example.md",
+      "script": "scripts/endpoints/mutation_example.py"
+    },
+    {
+      "name": "batch-example",
+      "operation_type": "batch",
+      "rule": "rules/batch-example.json",
+      "reference": "references/batch-example.md",
+      "script": "scripts/endpoints/batch_example.py"
+    }
+  ]
+}

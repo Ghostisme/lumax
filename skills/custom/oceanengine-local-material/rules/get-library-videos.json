@@ -1,0 +1,382 @@
+{
+  "schema_version": 1,
+  "name": "get-library-videos",
+  "title": "获取素材库视频",
+  "operation_type": "read",
+  "path": "/open_api/v3.0/local/file/video/get/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localFileVideoGet",
+    "match_tokens": [
+      "local",
+      "file",
+      "video",
+      "get",
+      "获取素材库视频"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": true,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推账号ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "filtering",
+      "label": "过滤条件",
+      "type": "object",
+      "required": true
+    },
+    {
+      "name": "order_field",
+      "label": "排序字段",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "order_type",
+      "label": "排序方向",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "page",
+      "label": "页码",
+      "type": "integer",
+      "required": false
+    },
+    {
+      "name": "page_size",
+      "label": "每页数量",
+      "type": "integer",
+      "required": false
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "filtering",
+      "page",
+      "page_size"
+    ],
+    "response_fields": [
+      {
+        "path": "code",
+        "field": "code",
+        "label": "返回码",
+        "type": "number",
+        "description": "返回码,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "message",
+        "field": "message",
+        "label": "返回信息",
+        "type": "string",
+        "description": "返回信息,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data",
+        "field": "data",
+        "label": "返回数据",
+        "type": "json",
+        "description": "返回数据",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[]",
+        "field": "video_list",
+        "label": "素材库视频列表",
+        "type": "object[]",
+        "description": "素材库视频列表",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[].video_id",
+        "field": "video_id",
+        "label": "视频ID",
+        "type": "string",
+        "description": "视频ID",
+        "display": "default"
+      },
+      {
+        "path": "data.video_list[].material_id",
+        "field": "material_id",
+        "label": "素材id",
+        "type": "number",
+        "description": "素材id",
+        "display": "default"
+      },
+      {
+        "path": "data.video_list[].signature",
+        "field": "signature",
+        "label": "视频md5",
+        "type": "string",
+        "description": "视频md5",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[].video_name",
+        "field": "video_name",
+        "label": "视频名称",
+        "type": "string",
+        "description": "视频名称",
+        "display": "default"
+      },
+      {
+        "path": "data.video_list[].video_url",
+        "field": "video_url",
+        "label": "视频地址",
+        "type": "string",
+        "description": "视频地址，链接有效期：1小时",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[].poster_url",
+        "field": "poster_url",
+        "label": "视频首帧截图",
+        "type": "string",
+        "description": "视频首帧截图",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[].material_properties[]",
+        "field": "material_properties",
+        "label": "素材标签",
+        "type": "string[]",
+        "description": "素材标签，枚举值：COPY 搬运风险 FIRST_PUBLISH 首发 HIGH_QUALITY 优质 LOW_QUALITY 低质 SIMILAR 同质化风险",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[].image_mode",
+        "field": "image_mode",
+        "label": "视频类型",
+        "type": "string",
+        "description": "视频类型，枚举值：IMAGE_MODE_VIDEO 横版视频 IMAGE_MODE_VIDEO_VERTICAL 竖版视频",
+        "display": "default"
+      },
+      {
+        "path": "data.video_list[].duration",
+        "field": "duration",
+        "label": "视频时长",
+        "type": "double",
+        "description": "视频时长",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[].source",
+        "field": "source",
+        "label": "视频来源",
+        "type": "string",
+        "description": "视频来源，枚举值：BP_PLATFORM 巨量引擎工作平台共享视频 CREATIVE_AIGC 即创 LOCAL_ADS_UPLOAD 本地上传 STAR 星图平台 MAPI MAPI接口上传",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.video_list[].create_time",
+        "field": "create_time",
+        "label": "素材上传时间",
+        "type": "string",
+        "description": "素材的上传时间，格式：yyyy-mm-dd HH:mm:ss",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.page_info",
+        "field": "page_info",
+        "label": "分页信息",
+        "type": "object",
+        "description": "分页信息",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.page_info.page",
+        "field": "page",
+        "label": "页码",
+        "type": "number",
+        "description": "页码",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.page_info.page_size",
+        "field": "page_size",
+        "label": "页面大小",
+        "type": "number",
+        "description": "页面大小",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.page_info.total_page",
+        "field": "total_page",
+        "label": "总页数",
+        "type": "number",
+        "description": "总页数",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.page_info.total_number",
+        "field": "total_number",
+        "label": "总数",
+        "type": "number",
+        "description": "总数",
+        "display": "default"
+      },
+      {
+        "path": "request_id",
+        "field": "request_id",
+        "label": "请求日志id",
+        "type": "string",
+        "description": "请求日志id",
+        "display": "diagnostic"
+      }
+    ]
+  },
+  "mcp_tool_name": "localFileVideoGet",
+  "match_tokens": [
+    "local",
+    "file",
+    "video",
+    "get",
+    "获取素材库视频"
+  ],
+  "required": [
+    "local_account_id",
+    "filtering"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推账号ID",
+    "filtering": "过滤条件",
+    "filtering.search_key_word": "搜索关键词",
+    "filtering.image_mode": "视频类型",
+    "filtering.image_mode[]": "视频类型",
+    "filtering.material_source": "素材来源",
+    "filtering.material_source[]": "素材来源",
+    "filtering.analysis_type": "分析类型",
+    "filtering.analysis_type[]": "分析类型",
+    "filtering.start_time": "筛选开始时间",
+    "filtering.end_time": "筛选结束时间",
+    "filtering.is_filter_unqualified": "是否过滤不合格素材",
+    "order_field": "排序字段",
+    "order_type": "排序方向",
+    "page": "页码",
+    "page_size": "每页数量"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "filtering": {
+      "type": "object"
+    },
+    "filtering.search_key_word": {
+      "type": "string"
+    },
+    "filtering.image_mode": {
+      "type": "array"
+    },
+    "filtering.image_mode[]": {
+      "type": "string",
+      "enum": [
+        "VIDEO",
+        "VIDEO_VERTICAL"
+      ],
+      "enum_labels": {
+        "VIDEO": "横版视频，对应官方 IMAGE_MODE_VIDEO",
+        "VIDEO_VERTICAL": "竖版视频，对应官方 IMAGE_MODE_VIDEO_VERTICAL"
+      }
+    },
+    "filtering.material_source": {
+      "type": "array"
+    },
+    "filtering.material_source[]": {
+      "type": "string",
+      "enum": [
+        "BP_PLATFORM",
+        "CREATIVE_AIGC",
+        "LOCAL_ADS_UPLOAD",
+        "STAR",
+        "MAPI"
+      ],
+      "enum_labels": {
+        "BP_PLATFORM": "即合平台素材",
+        "CREATIVE_AIGC": "AIGC素材",
+        "LOCAL_ADS_UPLOAD": "本地推上传",
+        "STAR": "星图视频",
+        "MAPI": "MAPI上传"
+      }
+    },
+    "filtering.analysis_type": {
+      "type": "array"
+    },
+    "filtering.analysis_type[]": {
+      "type": "string",
+      "enum": [
+        "FIRST_PUBLISH",
+        "FIRST_PUBLISH_AND_HIGH_QUALITY",
+        "HIGH_QUALITY"
+      ],
+      "enum_labels": {
+        "FIRST_PUBLISH": "首发素材",
+        "FIRST_PUBLISH_AND_HIGH_QUALITY": "首发且优质素材",
+        "HIGH_QUALITY": "优质素材"
+      }
+    },
+    "filtering.start_time": {
+      "type": "string"
+    },
+    "filtering.end_time": {
+      "type": "string"
+    },
+    "filtering.is_filter_unqualified": {
+      "type": "boolean"
+    },
+    "order_field": {
+      "type": "string",
+      "enum": [
+        "CONVERSION_COST",
+        "CONVERSION_RATE",
+        "CREATE_TIME",
+        "CTR",
+        "DURATION",
+        "STAT_COST"
+      ],
+      "enum_labels": {
+        "CONVERSION_COST": "转化成本",
+        "CONVERSION_RATE": "转化率",
+        "CREATE_TIME": "创建时间",
+        "CTR": "点击率",
+        "DURATION": "视频时长",
+        "STAT_COST": "消耗"
+      }
+    },
+    "order_type": {
+      "type": "string",
+      "enum": [
+        "ASC",
+        "DESC"
+      ],
+      "enum_labels": {
+        "ASC": "升序",
+        "DESC": "降序"
+      }
+    },
+    "page": {
+      "type": "integer",
+      "min": 1
+    },
+    "page_size": {
+      "type": "integer",
+      "min": 1,
+      "max": 100
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": [],
+  "mcp_wrap_request": true
+}

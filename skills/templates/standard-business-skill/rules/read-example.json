@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "name": "read-example",
+  "title": "读取示例",
+  "operation_type": "read",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "exampleRead",
+    "field_map": {
+      "account_id": "accountId"
+    }
+  },
+  "parameters": [
+    {
+      "name": "account_id",
+      "label": "账户 ID",
+      "type": "integer",
+      "required": true
+    },
+    {
+      "name": "status",
+      "label": "状态",
+      "type": "string",
+      "required": false,
+      "enum": ["ENABLE", "DISABLE"],
+      "enum_labels": {
+        "ENABLE": "启用",
+        "DISABLE": "暂停"
+      }
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": ["resource_id", "name", "status"]
+  }
+}

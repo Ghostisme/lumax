@@ -1,0 +1,999 @@
+{
+  "schema_version": 1,
+  "name": "update-project",
+  "title": "更新项目",
+  "operation_type": "mutation",
+  "path": "/open_api/v3.0/local/project/update/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localProjectUpdate",
+    "match_tokens": [
+      "local",
+      "project",
+      "update",
+      "更新项目"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {
+      "budgetMode": {
+        "DAY": "BUDGET_MODE_DAY",
+        "TOTAL": "BUDGET_MODE_TOTAL",
+        "ALL": "ALL"
+      }
+    },
+    "wrap_request": true,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "name",
+      "label": "项目名称",
+      "type": "string",
+      "min_length": 1,
+      "max_length": 50,
+      "required": false
+    },
+    {
+      "name": "marketing_goal",
+      "label": "营销场景",
+      "type": "string",
+      "enum": [
+        "LIVE",
+        "VIDEO_IMAGE"
+      ],
+      "enum_labels": {
+        "LIVE": "直播",
+        "VIDEO_IMAGE": "短视频或图文"
+      },
+      "required": false
+    },
+    {
+      "name": "local_delivery_scene",
+      "label": "营销目的",
+      "type": "string",
+      "enum": [
+        "CONTENT_HEAT",
+        "POI_RECOMMEND",
+        "PRODUCT_PAY",
+        "EXTERNAL"
+      ],
+      "enum_labels": {
+        "CONTENT_HEAT": "线上互动",
+        "POI_RECOMMEND": "线下到店",
+        "PRODUCT_PAY": "团购成交",
+        "EXTERNAL": "获取线索"
+      },
+      "required": false
+    },
+    {
+      "name": "ad_type",
+      "label": "单元类型",
+      "type": "string",
+      "enum": [
+        "GENERAL",
+        "SEARCHING"
+      ],
+      "enum_labels": {
+        "GENERAL": "通投",
+        "SEARCHING": "搜索"
+      },
+      "required": false
+    },
+    {
+      "name": "delivery_goal",
+      "label": "投放内容",
+      "type": "string",
+      "enum": [
+        "POI",
+        "PRODUCT"
+      ],
+      "enum_labels": {
+        "POI": "门店",
+        "PRODUCT": "商品"
+      },
+      "required": false
+    },
+    {
+      "name": "delivery_poi_mode",
+      "label": "是否投放全部门店",
+      "type": "string",
+      "enum": [
+        "ALL",
+        "PART"
+      ],
+      "enum_labels": {
+        "ALL": "投放全部门店",
+        "PART": "投放指定门店"
+      },
+      "required": false
+    },
+    {
+      "name": "promotion_poi_ids",
+      "label": "推门店ID列表",
+      "type": "array",
+      "min_items": 1,
+      "required": false
+    },
+    {
+      "name": "auto_update_pois",
+      "label": "自动更新门店设置",
+      "type": "string",
+      "enum": [
+        "ON",
+        "OFF"
+      ],
+      "enum_labels": {
+        "ON": "启用",
+        "OFF": "不启用"
+      },
+      "required": false
+    },
+    {
+      "name": "product_id",
+      "label": "商品投放ID",
+      "type": "number",
+      "required": false
+    },
+    {
+      "name": "aweme_id",
+      "label": "用于投放直播间的抖音号",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "external_action",
+      "label": "优化目标",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "market_page_ids",
+      "label": "营销页ID列表",
+      "type": "array",
+      "item_type": "number",
+      "min_items": 1,
+      "max_items": 10,
+      "required": false
+    },
+    {
+      "name": "consult_aweme_uid",
+      "label": "私信接待抖音号",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "audience",
+      "label": "audience",
+      "type": "object",
+      "required": false
+    },
+    {
+      "name": "schedule_type",
+      "label": "投放日期类型设置",
+      "type": "string",
+      "enum": [
+        "FROM_NOW_ON",
+        "START_TO_END",
+        "FIXED_TIME",
+        "DELIVERY_7DAY",
+        "DAILY_DELIVERY_DURATION"
+      ],
+      "enum_labels": {
+        "FROM_NOW_ON": "从今天起长期投放",
+        "START_TO_END": "设置开始结束时间",
+        "FIXED_TIME": "固定时长",
+        "DELIVERY_7DAY": "7天稳投",
+        "DAILY_DELIVERY_DURATION": "每天投放时长"
+      },
+      "required": false
+    },
+    {
+      "name": "schedule_fixed_seconds",
+      "label": "直播固定投放时长",
+      "type": "number",
+      "min": 1800,
+      "required": false
+    },
+    {
+      "name": "end_time",
+      "label": "结束投放时间",
+      "type": "string",
+      "format": "date",
+      "required": false
+    },
+    {
+      "name": "schedule_time",
+      "label": "投放时段",
+      "type": "string",
+      "min_length": 336,
+      "max_length": 336,
+      "required": false
+    },
+    {
+      "name": "bid_type",
+      "label": "出价方式",
+      "type": "string",
+      "enum": [
+        "MANUAL",
+        "SMART",
+        "STABILIZE_COSTS",
+        "MAX_CONVERSION"
+      ],
+      "enum_labels": {
+        "MANUAL": "手动出价",
+        "SMART": "智能出价",
+        "STABILIZE_COSTS": "稳定成本",
+        "MAX_CONVERSION": "最大转化"
+      },
+      "required": false
+    },
+    {
+      "name": "bid",
+      "label": "出价",
+      "type": "number",
+      "required": false
+    },
+    {
+      "name": "budget_mode",
+      "label": "预算模式设置",
+      "type": "string",
+      "enum": [
+        "BUDGET_MODE_DAY",
+        "BUDGET_MODE_TOTAL",
+        "BUDGET_MODE_7DAY_TOTAL"
+      ],
+      "enum_labels": {
+        "BUDGET_MODE_DAY": "日预算",
+        "BUDGET_MODE_TOTAL": "总预算",
+        "BUDGET_MODE_7DAY_TOTAL": "7日总预算"
+      },
+      "required": false
+    },
+    {
+      "name": "budget",
+      "label": "项目预算",
+      "type": "number",
+      "min": 10000,
+      "max": 999999999,
+      "required": false
+    },
+    {
+      "name": "is_set_peak_budget",
+      "label": "高峰日预算设置",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "name": "peak_week_days",
+      "label": "高峰日-自然周",
+      "type": "array",
+      "item_type": "string",
+      "item_enum": [
+        "MONDAY",
+        "TUESDAY",
+        "WEDNESDAY",
+        "THURSDAY",
+        "FRIDAY",
+        "SATURDAY",
+        "SUNDAY"
+      ],
+      "enum_labels": {
+        "MONDAY": "周一",
+        "TUESDAY": "周二",
+        "WEDNESDAY": "周三",
+        "THURSDAY": "周四",
+        "FRIDAY": "周五",
+        "SATURDAY": "周六",
+        "SUNDAY": "周日"
+      },
+      "required": false
+    },
+    {
+      "name": "peak_holidays",
+      "label": "高峰日-节假日",
+      "type": "array",
+      "required": false
+    },
+    {
+      "name": "high_budget_rate",
+      "label": "高峰日预算上调比例",
+      "type": "number",
+      "min": 20,
+      "max": 200,
+      "required": false
+    },
+    {
+      "name": "project_id",
+      "label": "项目ID",
+      "type": "number",
+      "required": true
+    }
+  ],
+  "constraints": [
+    {
+      "type": "conditional_required",
+      "when": {
+        "marketing_goal": "VIDEO_IMAGE"
+      },
+      "fields": [
+        "delivery_goal"
+      ],
+      "message": "短视频或图文项目必须填写投放内容"
+    },
+    {
+      "type": "conditional_required",
+      "when": {
+        "marketing_goal": "VIDEO_IMAGE",
+        "delivery_goal": "POI"
+      },
+      "fields": [
+        "delivery_poi_mode"
+      ],
+      "message": "短视频或图文推门店项目必须填写是否投放全部门店"
+    },
+    {
+      "type": "conditional_required",
+      "when": {
+        "delivery_goal": "POI",
+        "delivery_poi_mode": "PART"
+      },
+      "fields": [
+        "promotion_poi_ids"
+      ],
+      "message": "投放指定门店时必须填写推门店ID列表"
+    },
+    {
+      "type": "conditional_required",
+      "when": {
+        "marketing_goal": "VIDEO_IMAGE",
+        "delivery_goal": "PRODUCT"
+      },
+      "fields": [
+        "product_id"
+      ],
+      "message": "投放商品时必须填写商品投放ID"
+    },
+    {
+      "type": "conditional_required",
+      "when": {
+        "marketing_goal": "LIVE",
+        "local_delivery_scene": "CONTENT_HEAT"
+      },
+      "fields": [
+        "aweme_id"
+      ],
+      "message": "直播线上互动需要填写用于投放直播间的抖音号"
+    },
+    {
+      "type": "conditional_required",
+      "when": {
+        "marketing_goal": "LIVE",
+        "local_delivery_scene": "PRODUCT_PAY"
+      },
+      "fields": [
+        "aweme_id"
+      ],
+      "message": "直播团购成交需要填写用于投放直播间的抖音号"
+    },
+    {
+      "type": "conditional_required",
+      "when": {
+        "local_delivery_scene": "EXTERNAL"
+      },
+      "fields": [
+        "external_action"
+      ],
+      "message": "获取线索场景必须填写优化目标"
+    },
+    {
+      "type": "conditional_required",
+      "when": {
+        "schedule_type": "FIXED_TIME"
+      },
+      "fields": [
+        "schedule_fixed_seconds"
+      ],
+      "message": "固定时长投放必须填写直播固定投放时长"
+    },
+    {
+      "type": "conditional_required",
+      "when": {
+        "schedule_type": "START_TO_END"
+      },
+      "fields": [
+        "end_time"
+      ],
+      "message": "设置结束时间时必须填写结束投放时间"
+    },
+    {
+      "type": "conditional_required",
+      "when": {
+        "field": "end_time",
+        "exists": true
+      },
+      "fields": [
+        "schedule_type"
+      ],
+      "message": "更新投放开始或结束时间时必须填写投放日期类型设置"
+    },
+    {
+      "type": "conditional_required",
+      "when": {
+        "marketing_goal": "VIDEO_IMAGE",
+        "local_delivery_scene": [
+          "POI_RECOMMEND",
+          "PRODUCT_PAY"
+        ]
+      },
+      "fields": [
+        "is_set_peak_budget"
+      ],
+      "message": "短视频线下到店或团购成交项目必须填写高峰日预算设置"
+    },
+    {
+      "type": "conditional_required",
+      "when": {
+        "is_set_peak_budget": true
+      },
+      "fields": [
+        "high_budget_rate"
+      ],
+      "message": "开启高峰日预算时必须填写高峰日预算上调比例"
+    },
+    {
+      "type": "at_least_one",
+      "when": {
+        "is_set_peak_budget": true
+      },
+      "fields": [
+        "peak_week_days",
+        "peak_holidays"
+      ],
+      "message": "开启高峰日预算时，峰值预算投放周期至少需要填写自然周或节假日之一"
+    },
+    {
+      "type": "forbidden_when",
+      "when": {
+        "marketing_goal": "VIDEO_IMAGE",
+        "local_delivery_scene": "CONTENT_HEAT",
+        "ad_type": "SEARCHING"
+      },
+      "fields": [
+        "ad_type"
+      ],
+      "message": "短视频或图文线上互动不支持搜索单元"
+    },
+    {
+      "type": "forbidden_when",
+      "when": {
+        "local_delivery_scene": "EXTERNAL",
+        "ad_type": "SEARCHING"
+      },
+      "fields": [
+        "ad_type"
+      ],
+      "message": "获取线索场景不支持搜索单元"
+    },
+    {
+      "type": "forbidden_when",
+      "when": {
+        "local_delivery_scene": "EXTERNAL"
+      },
+      "fields": [
+        "aweme_id"
+      ],
+      "message": "获取线索场景不支持传入抖音号"
+    },
+    {
+      "type": "forbidden_when",
+      "when": {
+        "marketing_goal": "VIDEO_IMAGE",
+        "local_delivery_scene": [
+          "POI_RECOMMEND",
+          "PRODUCT_PAY"
+        ]
+      },
+      "fields": [
+        "external_action"
+      ],
+      "message": "短视频或图文线下到店或团购成交场景不支持传入优化目标"
+    },
+    {
+      "type": "forbidden_when",
+      "when": {
+        "schedule_type": "FIXED_TIME"
+      },
+      "fields": [
+        "schedule_time"
+      ],
+      "message": "固定时长投放不支持传入投放时段"
+    }
+  ],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "name",
+      "marketing_goal",
+      "local_delivery_scene",
+      "ad_type",
+      "delivery_goal",
+      "delivery_poi_mode",
+      "promotion_poi_ids",
+      "auto_update_pois",
+      "product_id",
+      "aweme_id",
+      "external_action",
+      "market_page_ids",
+      "consult_aweme_uid",
+      "audience",
+      "schedule_type",
+      "schedule_fixed_seconds",
+      "end_time",
+      "schedule_time",
+      "bid_type",
+      "bid",
+      "budget_mode",
+      "budget",
+      "is_set_peak_budget",
+      "peak_week_days",
+      "peak_holidays",
+      "high_budget_rate",
+      "project_id"
+    ]
+  },
+  "mcp_tool_name": "localProjectUpdate",
+  "match_tokens": [
+    "local",
+    "project",
+    "update",
+    "更新项目"
+  ],
+  "required": [
+    "local_account_id",
+    "project_id"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "name": "项目名称",
+    "marketing_goal": "营销场景",
+    "local_delivery_scene": "营销目的",
+    "ad_type": "单元类型",
+    "delivery_goal": "投放内容",
+    "delivery_poi_mode": "是否投放全部门店",
+    "promotion_poi_ids": "推门店ID列表",
+    "auto_update_pois": "自动更新门店设置",
+    "product_id": "商品投放ID",
+    "aweme_id": "用于投放直播间的抖音号",
+    "external_action": "优化目标",
+    "market_page_ids": "营销页ID列表",
+    "consult_aweme_uid": "私信接待抖音号",
+    "audience": "audience",
+    "schedule_type": "投放日期类型设置",
+    "schedule_fixed_seconds": "直播固定投放时长",
+    "end_time": "结束投放时间",
+    "schedule_time": "投放时段",
+    "bid_type": "出价方式",
+    "bid": "出价",
+    "budget_mode": "预算模式设置",
+    "budget": "项目预算",
+    "is_set_peak_budget": "高峰日预算设置",
+    "peak_week_days": "高峰日-自然周",
+    "peak_holidays": "高峰日-节假日",
+    "high_budget_rate": "高峰日预算上调比例",
+    "project_id": "项目ID"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "name": {
+      "type": "string",
+      "min_length": 1,
+      "max_length": 50
+    },
+    "marketing_goal": {
+      "type": "string",
+      "enum": [
+        "LIVE",
+        "VIDEO_IMAGE"
+      ],
+      "enum_labels": {
+        "LIVE": "直播",
+        "VIDEO_IMAGE": "短视频或图文"
+      }
+    },
+    "local_delivery_scene": {
+      "type": "string",
+      "enum": [
+        "CONTENT_HEAT",
+        "POI_RECOMMEND",
+        "PRODUCT_PAY",
+        "EXTERNAL"
+      ],
+      "enum_labels": {
+        "CONTENT_HEAT": "线上互动",
+        "POI_RECOMMEND": "线下到店",
+        "PRODUCT_PAY": "团购成交",
+        "EXTERNAL": "获取线索"
+      }
+    },
+    "ad_type": {
+      "type": "string",
+      "enum": [
+        "GENERAL",
+        "SEARCHING"
+      ],
+      "enum_labels": {
+        "GENERAL": "通投",
+        "SEARCHING": "搜索"
+      }
+    },
+    "delivery_goal": {
+      "type": "string",
+      "enum": [
+        "POI",
+        "PRODUCT"
+      ],
+      "enum_labels": {
+        "POI": "门店",
+        "PRODUCT": "商品"
+      }
+    },
+    "delivery_poi_mode": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "PART"
+      ],
+      "enum_labels": {
+        "ALL": "投放全部门店",
+        "PART": "投放指定门店"
+      }
+    },
+    "promotion_poi_ids": {
+      "type": "array",
+      "min_items": 1
+    },
+    "auto_update_pois": {
+      "type": "string",
+      "enum": [
+        "ON",
+        "OFF"
+      ],
+      "enum_labels": {
+        "ON": "启用",
+        "OFF": "不启用"
+      }
+    },
+    "product_id": {
+      "type": "number"
+    },
+    "aweme_id": {
+      "type": "string"
+    },
+    "external_action": {
+      "type": "string"
+    },
+    "market_page_ids": {
+      "type": "array",
+      "item_type": "number",
+      "min_items": 1,
+      "max_items": 10
+    },
+    "consult_aweme_uid": {
+      "type": "string"
+    },
+    "audience": {
+      "type": "object"
+    },
+    "schedule_type": {
+      "type": "string",
+      "enum": [
+        "FROM_NOW_ON",
+        "START_TO_END",
+        "FIXED_TIME",
+        "DELIVERY_7DAY",
+        "DAILY_DELIVERY_DURATION"
+      ],
+      "enum_labels": {
+        "FROM_NOW_ON": "从今天起长期投放",
+        "START_TO_END": "设置开始结束时间",
+        "FIXED_TIME": "固定时长",
+        "DELIVERY_7DAY": "7天稳投",
+        "DAILY_DELIVERY_DURATION": "每天投放时长"
+      }
+    },
+    "schedule_fixed_seconds": {
+      "type": "number",
+      "min": 1800
+    },
+    "end_time": {
+      "type": "string",
+      "format": "date"
+    },
+    "schedule_time": {
+      "type": "string",
+      "min_length": 336,
+      "max_length": 336
+    },
+    "bid_type": {
+      "type": "string",
+      "enum": [
+        "MANUAL",
+        "SMART",
+        "STABILIZE_COSTS",
+        "MAX_CONVERSION"
+      ],
+      "enum_labels": {
+        "MANUAL": "手动出价",
+        "SMART": "智能出价",
+        "STABILIZE_COSTS": "稳定成本",
+        "MAX_CONVERSION": "最大转化"
+      }
+    },
+    "bid": {
+      "type": "number"
+    },
+    "budget_mode": {
+      "type": "string",
+      "enum": [
+        "BUDGET_MODE_DAY",
+        "BUDGET_MODE_TOTAL",
+        "BUDGET_MODE_7DAY_TOTAL"
+      ],
+      "enum_labels": {
+        "BUDGET_MODE_DAY": "日预算",
+        "BUDGET_MODE_TOTAL": "总预算",
+        "BUDGET_MODE_7DAY_TOTAL": "7日总预算"
+      }
+    },
+    "budget": {
+      "type": "number",
+      "min": 10000,
+      "max": 999999999
+    },
+    "is_set_peak_budget": {
+      "type": "boolean"
+    },
+    "peak_week_days": {
+      "type": "array",
+      "item_type": "string",
+      "item_enum": [
+        "MONDAY",
+        "TUESDAY",
+        "WEDNESDAY",
+        "THURSDAY",
+        "FRIDAY",
+        "SATURDAY",
+        "SUNDAY"
+      ],
+      "enum_labels": {
+        "MONDAY": "周一",
+        "TUESDAY": "周二",
+        "WEDNESDAY": "周三",
+        "THURSDAY": "周四",
+        "FRIDAY": "周五",
+        "SATURDAY": "周六",
+        "SUNDAY": "周日"
+      }
+    },
+    "peak_holidays": {
+      "type": "array"
+    },
+    "high_budget_rate": {
+      "type": "number",
+      "min": 20,
+      "max": 200
+    },
+    "project_id": {
+      "type": "number"
+    }
+  },
+  "conditional_required": [
+    {
+      "when": {
+        "marketing_goal": "VIDEO_IMAGE"
+      },
+      "fields": [
+        "delivery_goal"
+      ],
+      "message": "短视频或图文项目必须填写投放内容"
+    },
+    {
+      "when": {
+        "marketing_goal": "VIDEO_IMAGE",
+        "delivery_goal": "POI"
+      },
+      "fields": [
+        "delivery_poi_mode"
+      ],
+      "message": "短视频或图文推门店项目必须填写是否投放全部门店"
+    },
+    {
+      "when": {
+        "delivery_goal": "POI",
+        "delivery_poi_mode": "PART"
+      },
+      "fields": [
+        "promotion_poi_ids"
+      ],
+      "message": "投放指定门店时必须填写推门店ID列表"
+    },
+    {
+      "when": {
+        "marketing_goal": "VIDEO_IMAGE",
+        "delivery_goal": "PRODUCT"
+      },
+      "fields": [
+        "product_id"
+      ],
+      "message": "投放商品时必须填写商品投放ID"
+    },
+    {
+      "when": {
+        "marketing_goal": "LIVE",
+        "local_delivery_scene": "CONTENT_HEAT"
+      },
+      "fields": [
+        "aweme_id"
+      ],
+      "message": "直播线上互动需要填写用于投放直播间的抖音号"
+    },
+    {
+      "when": {
+        "marketing_goal": "LIVE",
+        "local_delivery_scene": "PRODUCT_PAY"
+      },
+      "fields": [
+        "aweme_id"
+      ],
+      "message": "直播团购成交需要填写用于投放直播间的抖音号"
+    },
+    {
+      "when": {
+        "local_delivery_scene": "EXTERNAL"
+      },
+      "fields": [
+        "external_action"
+      ],
+      "message": "获取线索场景必须填写优化目标"
+    },
+    {
+      "when": {
+        "schedule_type": "FIXED_TIME"
+      },
+      "fields": [
+        "schedule_fixed_seconds"
+      ],
+      "message": "固定时长投放必须填写直播固定投放时长"
+    },
+    {
+      "when": {
+        "schedule_type": "START_TO_END"
+      },
+      "fields": [
+        "end_time"
+      ],
+      "message": "设置结束时间时必须填写结束投放时间"
+    },
+    {
+      "when": {
+        "field": "end_time",
+        "exists": true
+      },
+      "fields": [
+        "schedule_type"
+      ],
+      "message": "更新投放开始或结束时间时必须填写投放日期类型设置"
+    },
+    {
+      "when": {
+        "marketing_goal": "VIDEO_IMAGE",
+        "local_delivery_scene": [
+          "POI_RECOMMEND",
+          "PRODUCT_PAY"
+        ]
+      },
+      "fields": [
+        "is_set_peak_budget"
+      ],
+      "message": "短视频线下到店或团购成交项目必须填写高峰日预算设置"
+    },
+    {
+      "when": {
+        "is_set_peak_budget": true
+      },
+      "fields": [
+        "high_budget_rate"
+      ],
+      "message": "开启高峰日预算时必须填写高峰日预算上调比例"
+    }
+  ],
+  "forbidden_when": [
+    {
+      "when": {
+        "marketing_goal": "VIDEO_IMAGE",
+        "local_delivery_scene": "CONTENT_HEAT",
+        "ad_type": "SEARCHING"
+      },
+      "fields": [
+        "ad_type"
+      ],
+      "message": "短视频或图文线上互动不支持搜索单元"
+    },
+    {
+      "when": {
+        "local_delivery_scene": "EXTERNAL",
+        "ad_type": "SEARCHING"
+      },
+      "fields": [
+        "ad_type"
+      ],
+      "message": "获取线索场景不支持搜索单元"
+    },
+    {
+      "when": {
+        "local_delivery_scene": "EXTERNAL"
+      },
+      "fields": [
+        "aweme_id"
+      ],
+      "message": "获取线索场景不支持传入抖音号"
+    },
+    {
+      "when": {
+        "marketing_goal": "VIDEO_IMAGE",
+        "local_delivery_scene": [
+          "POI_RECOMMEND",
+          "PRODUCT_PAY"
+        ]
+      },
+      "fields": [
+        "external_action"
+      ],
+      "message": "短视频或图文线下到店或团购成交场景不支持传入优化目标"
+    },
+    {
+      "when": {
+        "schedule_type": "FIXED_TIME"
+      },
+      "fields": [
+        "schedule_time"
+      ],
+      "message": "固定时长投放不支持传入投放时段"
+    }
+  ],
+  "mcp_value_maps": {
+    "budgetMode": {
+      "DAY": "BUDGET_MODE_DAY",
+      "TOTAL": "BUDGET_MODE_TOTAL",
+      "ALL": "ALL"
+    }
+  },
+  "mcp_wrap_request": true,
+  "confirmation": {
+    "enabled": true,
+    "query_capability": "get-project-detail",
+    "max_retries": 3,
+    "mode": "project_detail",
+    "fields": [
+      "name",
+      "end_time",
+      "schedule_time",
+      "bid_type",
+      "bid",
+      "budget",
+      "is_set_peak_budget",
+      "peak_week_days",
+      "peak_holidays",
+      "high_budget_rate"
+    ]
+  }
+}

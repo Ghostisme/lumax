@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "name": "list-custom-audiences",
+  "title": "查询本地推创编可用人群包",
+  "operation_type": "read",
+  "path": "/open_api/v3.0/local/custom_audience/get/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localCustomAudienceGet",
+    "match_tokens": [
+      "local",
+      "custom_audience",
+      "查询本地推创编可用人群包"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": false,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "tags_type",
+      "label": "人群包属性",
+      "type": "string",
+      "enum": [
+        "CUSTOM",
+        "SYS_RECOMMEND"
+      ],
+      "enum_labels": {
+        "CUSTOM": "自定义人群包",
+        "SYS_RECOMMEND": "系统推荐人群包"
+      },
+      "required": true
+    },
+    {
+      "name": "page",
+      "label": "页码",
+      "type": "integer",
+      "min": 1,
+      "required": false
+    },
+    {
+      "name": "page_size",
+      "label": "每页数量",
+      "type": "integer",
+      "min": 1,
+      "max": 1000,
+      "required": false
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "tags_type",
+      "page",
+      "page_size"
+    ],
+    "response_fields": [
+      {
+        "path": "data.custom_audience_list[].custom_audience_id",
+        "label": "人群包ID"
+      },
+      {
+        "path": "data.custom_audience_list[].custom_audience_name",
+        "label": "人群包名称"
+      },
+      {
+        "path": "data.custom_audience_list[].cover_num",
+        "label": "覆盖量"
+      },
+      {
+        "path": "data.custom_audience_list[].status",
+        "label": "状态",
+        "enum_labels": {
+          "AVAILABLE": "可用",
+          "UNAVAILABLE": "不可用"
+        }
+      },
+      {
+        "path": "data.page_info.page",
+        "label": "页码"
+      },
+      {
+        "path": "data.page_info.page_size",
+        "label": "页面大小"
+      },
+      {
+        "path": "data.page_info.total_number",
+        "label": "总数"
+      },
+      {
+        "path": "data.page_info.total_page",
+        "label": "总页数"
+      }
+    ]
+  },
+  "mcp_tool_name": "localCustomAudienceGet",
+  "match_tokens": [
+    "local",
+    "custom_audience",
+    "查询本地推创编可用人群包"
+  ],
+  "required": [
+    "local_account_id",
+    "tags_type"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "tags_type": "人群包属性",
+    "page": "页码",
+    "page_size": "每页数量"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "tags_type": {
+      "type": "string",
+      "enum": [
+        "CUSTOM",
+        "SYS_RECOMMEND"
+      ],
+      "enum_labels": {
+        "CUSTOM": "自定义人群包",
+        "SYS_RECOMMEND": "系统推荐人群包"
+      }
+    },
+    "page": {
+      "type": "integer",
+      "min": 1
+    },
+    "page_size": {
+      "type": "integer",
+      "min": 1,
+      "max": 1000
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": []
+}

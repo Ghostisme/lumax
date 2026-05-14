@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "name": "async-upload-local-video",
+  "title": "异步上传本地推视频",
+  "operation_type": "mutation",
+  "path": "/open_api/v3.0/local/file/upload_task/create/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localFileUploadTaskCreate",
+    "match_tokens": [
+      "local",
+      "file",
+      "upload_task",
+      "create",
+      "异步上传本地推视频"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": true,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推账号ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "filename",
+      "label": "视频文件名",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "video_url",
+      "label": "视频URL",
+      "type": "string",
+      "required": true
+    }
+  ],
+  "constraints": [
+    {
+      "type": "regex",
+      "field": "video_url",
+      "pattern": "^https://.*tos.*",
+      "message": "仅支持官方连山云素材服务生成的 tos 链接"
+    }
+  ],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "filename",
+      "video_url"
+    ],
+    "response_fields": [
+      {
+        "path": "code",
+        "field": "code",
+        "label": "返回码",
+        "type": "number",
+        "description": "返回码,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "message",
+        "field": "message",
+        "label": "返回信息",
+        "type": "string",
+        "description": "返回信息,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data",
+        "field": "data",
+        "label": "json返回值",
+        "type": "json",
+        "description": "json返回值",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.task_id",
+        "field": "task_id",
+        "label": "任务id",
+        "type": "number",
+        "description": "任务id",
+        "display": "default"
+      },
+      {
+        "path": "request_id",
+        "field": "request_id",
+        "label": "请求日志id",
+        "type": "string",
+        "description": "请求日志id",
+        "display": "diagnostic"
+      }
+    ]
+  },
+  "mcp_tool_name": "localFileUploadTaskCreate",
+  "match_tokens": [
+    "local",
+    "file",
+    "upload_task",
+    "create",
+    "异步上传本地推视频"
+  ],
+  "required": [
+    "local_account_id",
+    "filename",
+    "video_url"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推账号ID",
+    "filename": "视频文件名",
+    "video_url": "视频URL"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "filename": {
+      "type": "string",
+      "min_length": 1
+    },
+    "video_url": {
+      "type": "string",
+      "max_length": 2048
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": [],
+  "mcp_wrap_request": true
+}

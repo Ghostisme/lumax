@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "name": "list-products-by-poi-ids",
+  "title": "根据门店ID拉取商品",
+  "operation_type": "read",
+  "path": "/open_api/v3.0/local/product/get_by_poiids/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localProductGetByPoiIds",
+    "match_tokens": [
+      "local",
+      "product",
+      "poiids",
+      "根据门店ID拉取商品"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": false,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "poi_ids",
+      "label": "门店ID列表",
+      "type": "array",
+      "required": true
+    },
+    {
+      "name": "local_delivery_scene",
+      "label": "营销目的",
+      "type": "string",
+      "enum": [
+        "CONTENT_HEAT",
+        "EXTERNAL",
+        "POI_RECOMMEND",
+        "PRODUCT_PAY"
+      ],
+      "enum_labels": {
+        "CONTENT_HEAT": "内容加热",
+        "EXTERNAL": "线索外流",
+        "POI_RECOMMEND": "门店引流",
+        "PRODUCT_PAY": "商品成交"
+      },
+      "required": false,
+      "default": "交易广告：CONTENT_HEAT、POI_RECOMMEND、PRODUCT_PAY"
+    }
+  ],
+  "constraints": [],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "poi_ids"
+    ],
+    "response_fields": [
+      {
+        "path": "code",
+        "field": "code",
+        "label": "返回码",
+        "type": "number",
+        "description": "返回码,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "message",
+        "field": "message",
+        "label": "返回信息",
+        "type": "string",
+        "description": "返回信息,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data",
+        "field": "data",
+        "label": "返回数据",
+        "type": "json",
+        "description": "返回数据",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.product_ids[]",
+        "field": "product_ids",
+        "label": "商品ID列表",
+        "type": "number[]",
+        "description": "商品ID列表",
+        "display": "default"
+      },
+      {
+        "path": "request_id",
+        "field": "request_id",
+        "label": "请求日志id",
+        "type": "string",
+        "description": "请求日志id",
+        "display": "diagnostic"
+      }
+    ]
+  },
+  "mcp_tool_name": "localProductGetByPoiIds",
+  "match_tokens": [
+    "local",
+    "product",
+    "poiids",
+    "根据门店ID拉取商品"
+  ],
+  "required": [
+    "local_account_id",
+    "poi_ids"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "poi_ids": "门店ID列表",
+    "local_delivery_scene": "营销目的"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "poi_ids": {
+      "type": "array",
+      "min_items": 1
+    },
+    "local_delivery_scene": {
+      "type": "string",
+      "enum": [
+        "CONTENT_HEAT",
+        "EXTERNAL",
+        "POI_RECOMMEND",
+        "PRODUCT_PAY"
+      ],
+      "enum_labels": {
+        "CONTENT_HEAT": "线上互动",
+        "EXTERNAL": "销售线索收集",
+        "POI_RECOMMEND": "线下到店",
+        "PRODUCT_PAY": "团购成交"
+      }
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": []
+}

@@ -1,0 +1,27 @@
+# Backend Dockerfile for Hot Reload - uses Amazon Linux base (pullable from ECR)
+# This is an alternative to the standard Dockerfile when Docker Hub is inaccessible
+
+FROM public.ecr.aws/amazonlinux/amazonlinux:2023 AS base
+
+RUN dnf install -y python3.11 python3.11-pip nodejs git tar curl --allowerasing && \
+    dnf clean all && \
+    ln -sf /usr/bin/python3.11 /usr/bin/python3 && \
+    ln -sf /usr/bin/python3 /usr/bin/python && \
+    alternatives --set python3 /usr/bin/python3.11 2>/dev/null || true
+
+# Install uv
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV PATH="/root/.local/bin:$PATH"
+
+# Install Python 3.12 via uv
+RUN uv python install 3.12
+
+# Note: Docker CLI skipped for hot-reload dev (DooD requires docker hub access)
+# For production, use the standard Dockerfile with proper docker CLI
+
+WORKDIR /app
+COPY backend ./backend
+COPY tools ./tools
+
+# Dependencies will be synced at container startup for flexibility
+CMD ["sh", "-c", "cd backend && uv sync --python 3.12 && PYTHONPATH=/app:/app/backend uv run uvicorn app.gateway.app:app --host 0.0.0.0 --port 8001 --reload"]

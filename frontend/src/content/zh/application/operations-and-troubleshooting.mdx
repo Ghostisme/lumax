@@ -1,0 +1,189 @@
+---
+title: 运维与排障
+description: 本页介绍 DeerFlow App 的日常运维任务，以及常见问题的排查与修复方法。
+---
+
+import { Cards } from "nextra/components";
+
+# 运维与排障
+
+本页介绍 DeerFlow App 的日常运维任务，以及常见问题的排查与修复方法。
+
+## 日志文件
+
+使用 `make dev` 启动后，所有服务日志会写入 `logs/` 目录：
+
+| 文件                 | 服务                                  |
+| -------------------- | ------------------------------------- |
+| `logs/langgraph.log` | LangGraph / DeerFlow Harness 运行时   |
+| `logs/gateway.log`   | FastAPI Gateway API                   |
+| `logs/frontend.log`  | Next.js 前端开发服务                  |
+| `logs/nginx.log`     | nginx 反向代理                        |
+
+实时查看日志：
+
+```bash
+tail -f logs/langgraph.log
+tail -f logs/gateway.log
+```
+
+在 `config.yaml` 中可调整运行时日志级别：
+
+```yaml
+log_level: debug # debug | info | warning | error
+```
+
+## 健康检查
+
+验证各服务是否正常响应：
+
+```bash
+# Gateway 健康状态
+curl http://localhost:8001/health
+
+# LangGraph 健康状态
+curl http://localhost:2024/ok
+
+# 通过 nginx 检查完整代理链路
+curl http://localhost:2026/api/models
+```
+
+## 配置升级
+
+拉取 DeerFlow 新版本后，`config.example.yaml` 中的 `config_version` 可能高于你的 `config.yaml`。若要在保留自定义配置的前提下合并新字段：
+
+```bash
+make config-upgrade
+```
+
+查看当前配置版本：
+
+```bash
+grep config_version config.yaml
+```
+
+## 常见问题
+
+### 页面可打开，但 Agent 无响应
+
+1. 检查 `logs/langgraph.log` 是否有启动错误。
+2. 确认 `config.yaml` 中模型配置正确且 API Key 有效。
+3. 确认运行 `make dev` 的同一 Shell 已设置对应环境变量。
+4. 直接使用 `curl` 测试模型接口，排除网络问题。
+
+---
+
+### Agent 返回模型 API 错误
+
+常见报错如 `"No chat models are configured"` 或 `"model not found"`：
+
+- 检查 `config.yaml` 的 `models:` 至少包含一个模型。
+- 确认 `name:` 与前端请求的模型名一致。
+- 确认 `api_key:` 引用的环境变量正确，且变量已设置。
+
+---
+
+### 前端构建失败（环境变量校验）
+
+如果前端构建报环境变量相关错误：
+
+```bash
+cd frontend && pnpm build
+```
+
+开发环境可临时跳过校验（不建议用于生产）：
+
+```bash
+SKIP_ENV_VALIDATION=1 pnpm build
+```
+
+也可将相关变量写入仓库根目录 `.env`。
+
+---
+
+### 沙箱相关工具执行失败
+
+当文件工具（如 `read_file`、`ls`、`bash`）报权限或路径错误时：
+
+1. `LocalSandboxProvider`：检查 `allow_host_bash` 配置，以及线程数据目录是否可读写。
+2. 容器沙箱：确认 Docker（或 Apple Container）正在运行，且沙箱镜像可拉取。
+3. K8s Provisioner：确认服务健康（`curl http://localhost:8002/health`），并检查 K8s 集群可达。
+
+---
+
+### K8s Provisioner 无法连接
+
+出现类似错误：
+
+```text
+Connection refused: http://provisioner:8002
+```
+
+排查建议：
+
+- 确认 provisioner 服务已启动：`docker compose ps`
+- 检查 `K8S_API_SERVER` 是否正确（应为容器内可访问的 K8s API 地址，不能是 `localhost`）
+- 确认 `~/.kube/config` 已正确挂载，且宿主机可访问集群
+
+---
+
+### MCP 工具未加载
+
+若 `extensions_config.json` 中已配置 MCP，但 Agent 内不可用：
+
+1. 查看 `logs/langgraph.log` 中 MCP 初始化错误。
+2. 确认 MCP 服务命令已安装（如 `npx`、`uvx` 或对应可执行文件）。
+3. 手动执行该命令，确认能无报错启动。
+4. 将 `log_level` 设置为 `debug` 查看详细加载日志。
+
+---
+
+### 会话间记忆未持久化
+
+- 确认 `config.yaml` 中 `memory.enabled: true`
+- 检查存储路径可写：`ls -la backend/.deer-flow/`
+- 在 `logs/langgraph.log` 中搜索 `memory` 相关报错
+
+## 数据备份
+
+线程数据与记忆位于 `backend/.deer-flow/`：
+
+```text
+backend/.deer-flow/
+  memory.json           # 全局 Agent 记忆
+  agents/               # 各 Agent 的记忆
+  threads/              # 线程工作目录
+    {thread_id}/
+      user-data/
+        uploads/
+        outputs/
+  checkpoints.db        # SQLite 检查点（若启用）
+```
+
+备份整个目录即可保留会话历史、产物与记忆数据。
+
+Docker 部署时，以宿主机挂载路径（`$DEER_FLOW_ROOT/backend/.deer-flow/`）为准，请备份宿主机路径。
+
+## 重启服务
+
+本地部署重启：
+
+```bash
+make stop
+make dev
+```
+
+Docker 部署重启：
+
+```bash
+docker compose -f docker/docker-compose-dev.yaml down
+docker compose -f docker/docker-compose-dev.yaml up
+```
+
+<Cards num={2}>
+  <Cards.Card
+    title="部署指南"
+    href="/docs/application/deployment-guide"
+  />
+  <Cards.Card title="配置" href="/docs/application/configuration" />
+</Cards>

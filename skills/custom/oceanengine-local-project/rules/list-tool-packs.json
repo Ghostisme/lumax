@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "name": "list-tool-packs",
+  "title": "获取可用留资组件列表",
+  "operation_type": "read",
+  "path": "/open_api/v3.0/local/tool_pack_list/get/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": "localToolPackListGet",
+    "match_tokens": [
+      "local",
+      "tool_pack_list",
+      "获取可用留资组件列表"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": false,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "local_account_id",
+      "label": "本地推投放账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "delivery_goal",
+      "label": "投放内容",
+      "type": "string",
+      "enum": [
+        "POI",
+        "PRODUCT"
+      ],
+      "enum_labels": {
+        "POI": "门店",
+        "PRODUCT": "商品"
+      },
+      "required": true
+    },
+    {
+      "name": "poi_ids",
+      "label": "门店ID列表",
+      "type": "array",
+      "max_items": 10000,
+      "required": false
+    },
+    {
+      "name": "product_ids",
+      "label": "商品ID列表",
+      "type": "array",
+      "max_items": 10,
+      "required": false
+    },
+    {
+      "name": "intelligent_selection_mode",
+      "label": "获取线索方式",
+      "type": "string",
+      "enum": [
+        "INTELLIGENT_SELECTION_MODE_OFF",
+        "INTELLIGENT_SELECTION_MODE_ON"
+      ],
+      "enum_labels": {
+        "INTELLIGENT_SELECTION_MODE_OFF": "自定义",
+        "INTELLIGENT_SELECTION_MODE_ON": "智能优选"
+      },
+      "required": true
+    },
+    {
+      "name": "page",
+      "label": "页码",
+      "type": "integer",
+      "min": 1,
+      "required": false
+    },
+    {
+      "name": "page_size",
+      "label": "每页数量",
+      "type": "integer",
+      "min": 1,
+      "required": false
+    }
+  ],
+  "constraints": [
+    {
+      "type": "conditional_required",
+      "when": {
+        "delivery_goal": "POI"
+      },
+      "fields": [
+        "poi_ids"
+      ],
+      "message": "投放内容为门店时必须填写门店ID列表"
+    },
+    {
+      "type": "conditional_required",
+      "when": {
+        "delivery_goal": "PRODUCT"
+      },
+      "fields": [
+        "product_ids"
+      ],
+      "message": "投放内容为商品时必须填写商品ID列表"
+    }
+  ],
+  "output": {
+    "success_fields": [
+      "local_account_id",
+      "delivery_goal",
+      "poi_ids",
+      "product_ids",
+      "intelligent_selection_mode",
+      "page",
+      "page_size"
+    ],
+    "response_fields": [
+      {
+        "path": "data.tool_pack_list[].tool_pack_id",
+        "label": "留资组件ID"
+      },
+      {
+        "path": "data.tool_pack_list[].tool_pack_name",
+        "label": "留资组件名称"
+      },
+      {
+        "path": "data.tool_pack_list[].tool_pack_types[]",
+        "label": "组件类型",
+        "value_labels": {
+          "TOOL_TYPE_CONSULT": "私信咨询",
+          "TOOL_TYPE_FORM": "表单预约",
+          "TOOL_TYPE_SMART": "电话咨询"
+        }
+      },
+      {
+        "path": "data.tool_pack_list[].enable",
+        "label": "组件是否可用"
+      },
+      {
+        "path": "data.tool_pack_list[].enable_intelligent_selection",
+        "label": "是否支持智能优选"
+      },
+      {
+        "path": "data.pagination.page",
+        "label": "页码"
+      },
+      {
+        "path": "data.pagination.page_size",
+        "label": "页面大小"
+      },
+      {
+        "path": "data.pagination.total_page",
+        "label": "总页数"
+      },
+      {
+        "path": "data.pagination.total_num",
+        "label": "总数"
+      },
+      {
+        "path": "request_id",
+        "label": "请求日志id",
+        "display": "diagnostic"
+      }
+    ]
+  },
+  "mcp_tool_name": "localToolPackListGet",
+  "match_tokens": [
+    "local",
+    "tool_pack_list",
+    "获取可用留资组件列表"
+  ],
+  "required": [
+    "local_account_id",
+    "delivery_goal",
+    "intelligent_selection_mode"
+  ],
+  "field_labels": {
+    "local_account_id": "本地推投放账户ID",
+    "delivery_goal": "投放内容",
+    "poi_ids": "门店ID列表",
+    "product_ids": "商品ID列表",
+    "intelligent_selection_mode": "获取线索方式",
+    "page": "页码",
+    "page_size": "每页数量"
+  },
+  "fields": {
+    "local_account_id": {
+      "type": "number"
+    },
+    "delivery_goal": {
+      "type": "string",
+      "enum": [
+        "POI",
+        "PRODUCT"
+      ],
+      "enum_labels": {
+        "POI": "门店",
+        "PRODUCT": "商品"
+      }
+    },
+    "poi_ids": {
+      "type": "array",
+      "max_items": 10000
+    },
+    "product_ids": {
+      "type": "array",
+      "max_items": 10
+    },
+    "intelligent_selection_mode": {
+      "type": "string",
+      "enum": [
+        "INTELLIGENT_SELECTION_MODE_OFF",
+        "INTELLIGENT_SELECTION_MODE_ON"
+      ],
+      "enum_labels": {
+        "INTELLIGENT_SELECTION_MODE_OFF": "自定义",
+        "INTELLIGENT_SELECTION_MODE_ON": "智能优选"
+      }
+    },
+    "page": {
+      "type": "integer",
+      "min": 1
+    },
+    "page_size": {
+      "type": "integer",
+      "min": 1
+    }
+  },
+  "conditional_required": [
+    {
+      "when": {
+        "delivery_goal": "POI"
+      },
+      "fields": [
+        "poi_ids"
+      ],
+      "message": "投放内容为门店时必须填写门店ID列表"
+    },
+    {
+      "when": {
+        "delivery_goal": "PRODUCT"
+      },
+      "fields": [
+        "product_ids"
+      ],
+      "message": "投放内容为商品时必须填写商品ID列表"
+    }
+  ],
+  "forbidden_when": []
+}

@@ -1,0 +1,163 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "js/ts.tsdk.path": "frontend/node_modules/typescript/lib",
+    "python-envs.pythonProjects": [
+      {
+        "path": "backend",
+        "envManager": "ms-python.python:venv",
+        "packageManager": "ms-python.python:pip",
+        "workspace": "deer-flow"
+      }
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug Lead Agent",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/backend/debug.py",
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder}/backend",
+        "envFile": "${workspaceFolder}/.env",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}/backend"
+        },
+        "justMyCode": false
+      },
+      {
+        "name": "Debug Lead Agent (justMyCode)",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/backend/debug.py",
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder}/backend",
+        "envFile": "${workspaceFolder}/.env",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}/backend"
+        },
+        "justMyCode": true
+      },
+      {
+        "name": "Debug Gateway (uvicorn :8001 standalone)",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "uvicorn",
+        "args": [
+          "app.gateway.app:app",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8001"
+        ],
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder}/backend",
+        "envFile": "${workspaceFolder}/.env",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}/backend",
+          "GATEWAY_PORT": "8001"
+        },
+        "justMyCode": false
+      },
+      {
+        "name": "Debug Gateway (uvicorn :8002 replace serve.py)",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "uvicorn",
+        "args": [
+          "app.gateway.app:app",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8002"
+        ],
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder}/backend",
+        "envFile": "${workspaceFolder}/.env",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}/backend",
+          "GATEWAY_PORT": "8002"
+        },
+        "justMyCode": false,
+        "preLaunchTask": "stop deerflow services"
+      },
+      {
+        "name": "Debug Gateway (uvicorn :8001 + reload, follow subprocess)",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "uvicorn",
+        "args": [
+          "app.gateway.app:app",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8001",
+          "--reload",
+          "--reload-include=*.yaml",
+          "--reload-include=.env",
+          "--reload-exclude=*.pyc",
+          "--reload-exclude=__pycache__",
+          "--reload-exclude=sandbox/",
+          "--reload-exclude=.deer-flow/"
+        ],
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder}/backend",
+        "envFile": "${workspaceFolder}/.env",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}/backend",
+          "GATEWAY_PORT": "8001"
+        },
+        "justMyCode": false,
+        "subProcess": true
+      },
+      {
+        "name": "Pytest: current file",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "pytest",
+        "args": [
+          "${file}",
+          "-v",
+          "-s"
+        ],
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder}/backend",
+        "envFile": "${workspaceFolder}/.env",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}/backend"
+        },
+        "justMyCode": false
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "stop deerflow services",
+        "type": "shell",
+        "command": "uv",
+        "args": [
+          "run",
+          "python",
+          "${workspaceFolder}/scripts/serve.py",
+          "--stop"
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "presentation": {
+          "reveal": "silent",
+          "panel": "shared"
+        },
+        "problemMatcher": []
+      }
+    ]
+  }
+}

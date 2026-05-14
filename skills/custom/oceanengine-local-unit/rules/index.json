@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "skill": "oceanengine-local-unit",
+  "capabilities": [
+    {
+      "name": "create-unit",
+      "operation_type": "mutation",
+      "reference": "references/create-unit.md",
+      "rule": "rules/create-unit.json",
+      "script": "scripts/endpoints/create_unit.py"
+    },
+    {
+      "name": "update-unit",
+      "operation_type": "mutation",
+      "reference": "references/update-unit.md",
+      "rule": "rules/update-unit.json",
+      "script": "scripts/endpoints/update_unit.py"
+    },
+    {
+      "name": "list-units",
+      "operation_type": "read",
+      "reference": "references/list-units.md",
+      "rule": "rules/list-units.json",
+      "script": "scripts/endpoints/list_units.py"
+    },
+    {
+      "name": "get-unit-detail",
+      "operation_type": "read",
+      "reference": "references/get-unit-detail.md",
+      "rule": "rules/get-unit-detail.json",
+      "script": "scripts/endpoints/get_unit_detail.py"
+    },
+    {
+      "name": "batch-update-unit-status",
+      "operation_type": "batch",
+      "reference": "references/batch-update-unit-status.md",
+      "rule": "rules/batch-update-unit-status.json",
+      "script": "scripts/endpoints/batch_update_unit_status.py"
+    },
+    {
+      "name": "list-products-by-poi-ids",
+      "operation_type": "read",
+      "reference": "references/list-products-by-poi-ids.md",
+      "rule": "rules/list-products-by-poi-ids.json",
+      "script": "scripts/endpoints/list_products_by_poi_ids.py"
+    },
+    {
+      "name": "batch-get-unit-reject-reasons",
+      "operation_type": "read",
+      "reference": "references/batch-get-unit-reject-reasons.md",
+      "rule": "rules/batch-get-unit-reject-reasons.json",
+      "script": "scripts/endpoints/batch_get_unit_reject_reasons.py"
+    }
+  ]
+}

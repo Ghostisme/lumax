@@ -1,0 +1,405 @@
+{
+  "schema_version": 1,
+  "name": "list-video-material-attributes",
+  "title": "获取视频素材评估标签",
+  "operation_type": "read",
+  "path": "/open_api/2/file/material_attributes/list/",
+  "mcp": {
+    "server": "platform-agent-biz",
+    "tool": null,
+    "match_tokens": [
+      "file",
+      "material_attributes",
+      "list",
+      "获取视频素材评估标签"
+    ],
+    "field_map": {},
+    "array_field_map": {},
+    "value_maps": {},
+    "wrap_request": false,
+    "batch_field": null
+  },
+  "parameters": [
+    {
+      "name": "account_id",
+      "label": "账户ID",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "account_type",
+      "label": "账户类型",
+      "type": "string",
+      "enum": [
+        "LOCAL"
+      ],
+      "enum_labels": {
+        "LOCAL": "本地推账户"
+      },
+      "required": true
+    },
+    {
+      "name": "filtering",
+      "label": "过滤条件",
+      "type": "object",
+      "required": false
+    },
+    {
+      "name": "return_lowquality_suggestions",
+      "label": "是否返回低质建议",
+      "type": "boolean",
+      "required": false
+    },
+    {
+      "name": "page_size",
+      "label": "每页数量",
+      "type": "integer",
+      "required": true
+    },
+    {
+      "name": "page",
+      "label": "页码",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "constraints": [
+    {
+      "type": "product_max",
+      "fields": [
+        "page",
+        "page_size"
+      ],
+      "max": 1000,
+      "message": "页码和每页数量的乘积不能大于 1000。"
+    }
+  ],
+  "output": {
+    "success_fields": [
+      "account_id",
+      "account_type",
+      "filtering",
+      "page",
+      "page_size"
+    ],
+    "response_fields": [
+      {
+        "path": "code",
+        "field": "code",
+        "label": "返回码",
+        "type": "number",
+        "description": "返回码,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "message",
+        "field": "message",
+        "label": "返回信息",
+        "type": "string",
+        "description": "返回信息,详见 【附录-返回码】",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data",
+        "field": "data",
+        "label": "返回数据",
+        "type": "json",
+        "description": "返回数据",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.materials[]",
+        "field": "materials",
+        "label": "素材及素材属性列表",
+        "type": "object[]",
+        "description": "素材及素材属性列表",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.materials[].material_id",
+        "field": "material_id",
+        "label": "素材id",
+        "type": "number",
+        "description": "素材id",
+        "display": "default"
+      },
+      {
+        "path": "data.materials[].ad_low_quality_suggestions[]",
+        "field": "ad_low_quality_suggestions",
+        "label": "AD低质原因",
+        "type": "string[]",
+        "description": "当该素材为AD低质素材时，返回低质原因，仅当return_lowquality_suggestions = true时，会返回此参数",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.materials[].ecp_low_quality_suggestions[]",
+        "field": "ecp_low_quality_suggestions",
+        "label": "千川低质原因",
+        "type": "string[]",
+        "description": "当该素材为千川低质素材时，返回低质原因，仅当return_lowquality_suggestions = true时，会返回此参数",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.materials[].local_low_quality_suggestions[]",
+        "field": "local_low_quality_suggestions",
+        "label": "本地推低质原因",
+        "type": "string[]",
+        "description": "当该素材为本地推低质素材时，返回低质原因，仅当return_lowquality_suggestions = true时，会返回此参数",
+        "display": "default"
+      },
+      {
+        "path": "data.materials[].is_ad_high_quality_material",
+        "field": "is_ad_high_quality_material",
+        "label": "是否AD优质素材",
+        "type": "bool",
+        "description": "是否AD优质素材",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.materials[].is_ad_low_quality_material",
+        "field": "is_ad_low_quality_material",
+        "label": "是否AD低质素材",
+        "type": "bool",
+        "description": "是否AD低质素材",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.materials[].is_ecp_high_quality_material",
+        "field": "is_ecp_high_quality_material",
+        "label": "是否千川优质素材",
+        "type": "bool",
+        "description": "是否千川优质素材",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.materials[].is_ecp_low_quality_material",
+        "field": "is_ecp_low_quality_material",
+        "label": "是否千川低质素材",
+        "type": "bool",
+        "description": "是否千川低质素材",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.materials[].is_local_high_quality_material",
+        "field": "is_local_high_quality_material",
+        "label": "是否本地推优质素材",
+        "type": "bool",
+        "description": "是否本地推优质素材",
+        "display": "default"
+      },
+      {
+        "path": "data.materials[].is_local_low_quality_material",
+        "field": "is_local_low_quality_material",
+        "label": "是否本地推低质素材",
+        "type": "bool",
+        "description": "是否本地推低质素材",
+        "display": "default"
+      },
+      {
+        "path": "data.materials[].is_first_publish_material",
+        "field": "is_first_publish_material",
+        "label": "是否首发素材",
+        "type": "bool",
+        "description": "是否是首发素材",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.materials[].is_inefficient_material",
+        "field": "is_inefficient_material",
+        "label": "是否低效素材",
+        "type": "bool",
+        "description": "是否低效素材",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.materials[].is_carry_material",
+        "field": "is_carry_material",
+        "label": "是否存在搬运风险",
+        "type": "bool",
+        "description": "是否存在搬运风险，建议入参account_type = AD 或 QIANCHUAN 或本地推查询",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.materials[].is_similar_material",
+        "field": "is_similar_material",
+        "label": "是否同质化挤压严重素材",
+        "type": "bool",
+        "description": "是否同质化挤压严重素材，方舟/工作台账户不支持",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.materials[].is_similar_queue_material",
+        "field": "is_similar_queue_material",
+        "label": "是否同质化素材风险-排队投放素材",
+        "type": "bool",
+        "description": "是否同质化素材风险-排队投放素材，方舟/工作台账户不支持",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.materials[].is_similar_expected_queue_material",
+        "field": "is_similar_expected_queue_material",
+        "label": "是否同质化素材风险-未投放预计排队素材",
+        "type": "bool",
+        "description": "是否同质化素材风险-未投放预计排队素材，方舟/工作台账户不支持",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.materials[].attributes_modify_time",
+        "field": "attributes_modify_time",
+        "label": "属性最后一次更新时间",
+        "type": "string",
+        "description": "「存在搬运打压风险」属性最后一次更新时间，如素材未被标记为搬运，则不会返回该时间。格式为yyyy-mm-dd HH:MM:SS",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.page",
+        "field": "page",
+        "label": "分页信息",
+        "type": "object",
+        "description": "分页信息",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.page.page",
+        "field": "page",
+        "label": "页码",
+        "type": "number",
+        "description": "页码",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.page.page_size",
+        "field": "page_size",
+        "label": "页面大小",
+        "type": "number",
+        "description": "页面大小",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.page.total_count",
+        "field": "total_count",
+        "label": "总页数",
+        "type": "number",
+        "description": "总页数",
+        "display": "diagnostic"
+      },
+      {
+        "path": "data.page.total_number",
+        "field": "total_number",
+        "label": "总数",
+        "type": "number",
+        "description": "总数",
+        "display": "default"
+      },
+      {
+        "path": "request_id",
+        "field": "request_id",
+        "label": "请求日志id",
+        "type": "string",
+        "description": "请求日志id",
+        "display": "diagnostic"
+      }
+    ]
+  },
+  "mcp_missing": true,
+  "match_tokens": [
+    "file",
+    "material_attributes",
+    "list",
+    "获取视频素材评估标签"
+  ],
+  "required": [
+    "account_id",
+    "account_type",
+    "page_size",
+    "page"
+  ],
+  "field_labels": {
+    "account_id": "账户ID",
+    "account_type": "账户类型",
+    "filtering": "过滤条件",
+    "filtering.material_ids": "素材ID列表",
+    "filtering.material_properties": "素材属性列表",
+    "filtering.material_properties[]": "素材属性",
+    "filtering.start_time": "筛选开始时间",
+    "filtering.end_time": "筛选结束时间",
+    "filtering.attributes_modify_time": "标签更新时间",
+    "return_lowquality_suggestions": "是否返回低质建议",
+    "page_size": "每页数量",
+    "page": "页码"
+  },
+  "fields": {
+    "account_id": {
+      "type": "number"
+    },
+    "account_type": {
+      "type": "string",
+      "enum": [
+        "LOCAL"
+      ],
+      "enum_labels": {
+        "LOCAL": "本地推账户"
+      }
+    },
+    "filtering": {
+      "type": "object"
+    },
+    "filtering.material_ids": {
+      "type": "array",
+      "min_items": 1,
+      "max_items": 1000
+    },
+    "filtering.material_properties": {
+      "type": "array"
+    },
+    "filtering.material_properties[]": {
+      "type": "string",
+      "enum": [
+        "FIRST_PUBLISH_MATERIAL",
+        "AD_HIGH_QUALITY_MATERIAL",
+        "ECP_HIGH_QUALITY_MATERIAL",
+        "AD_LOW_QUALITY_MATERIAL",
+        "ECP_LOW_QUALITY_MATERIAL",
+        "INEFFICIENT_MATERIAL",
+        "SIMILAR_MATERIAL",
+        "SIMILAR_QUEUE_MATERIAL",
+        "CARRY_MATERIAL"
+      ],
+      "enum_labels": {
+        "FIRST_PUBLISH_MATERIAL": "首发素材",
+        "AD_HIGH_QUALITY_MATERIAL": "广告优质素材",
+        "ECP_HIGH_QUALITY_MATERIAL": "电商优质素材",
+        "AD_LOW_QUALITY_MATERIAL": "广告低质素材",
+        "ECP_LOW_QUALITY_MATERIAL": "电商低质素材",
+        "INEFFICIENT_MATERIAL": "低效素材",
+        "SIMILAR_MATERIAL": "同质化素材",
+        "SIMILAR_QUEUE_MATERIAL": "同质化队列素材",
+        "CARRY_MATERIAL": "搬运素材"
+      }
+    },
+    "filtering.start_time": {
+      "type": "string"
+    },
+    "filtering.end_time": {
+      "type": "string"
+    },
+    "filtering.attributes_modify_time": {
+      "type": "string"
+    },
+    "return_lowquality_suggestions": {
+      "type": "boolean"
+    },
+    "page_size": {
+      "type": "integer",
+      "min": 1,
+      "max": 1000
+    },
+    "page": {
+      "type": "integer",
+      "min": 1
+    }
+  },
+  "conditional_required": [],
+  "forbidden_when": [],
+  "mcp_wrap_request": false
+}

@@ -1,0 +1,17 @@
+.git
+**/.git
+**/node_modules
+**/.next
+**/__pycache__
+**/.venv
+**/.env.local
+**/.env.*.local
+**/dist
+**/*.log
+**/.DS_Store
+**/Thumbs.db
+**/.turbo
+**/.cache
+**/coverage
+**/.playwright
+**/test-results

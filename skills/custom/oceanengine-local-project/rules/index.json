@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "skill": "oceanengine-local-project",
+  "capabilities": [
+    {
+      "name": "create-project",
+      "operation_type": "mutation",
+      "reference": "references/create-project.md",
+      "rule": "rules/create-project.json",
+      "script": "scripts/endpoints/create_project.py"
+    },
+    {
+      "name": "update-project",
+      "operation_type": "mutation",
+      "reference": "references/update-project.md",
+      "rule": "rules/update-project.json",
+      "script": "scripts/endpoints/update_project.py"
+    },
+    {
+      "name": "list-projects",
+      "operation_type": "read",
+      "reference": "references/list-projects.md",
+      "rule": "rules/list-projects.json",
+      "script": "scripts/endpoints/list_projects.py"
+    },
+    {
+      "name": "get-project-detail",
+      "operation_type": "read",
+      "reference": "references/get-project-detail.md",
+      "rule": "rules/get-project-detail.json",
+      "script": "scripts/endpoints/get_project_detail.py"
+    },
+    {
+      "name": "batch-update-project-status",
+      "operation_type": "batch",
+      "reference": "references/batch-update-project-status.md",
+      "rule": "rules/batch-update-project-status.json",
+      "script": "scripts/endpoints/batch_update_project_status.py"
+    },
+    {
+      "name": "list-promotable-pois",
+      "operation_type": "read",
+      "reference": "references/list-promotable-pois.md",
+      "rule": "rules/list-promotable-pois.json",
+      "script": "scripts/endpoints/list_promotable_pois.py"
+    },
+    {
+      "name": "list-promotable-products",
+      "operation_type": "read",
+      "reference": "references/list-promotable-products.md",
+      "rule": "rules/list-promotable-products.json",
+      "script": "scripts/endpoints/list_promotable_products.py"
+    },
+    {
+      "name": "list-authorized-awemes",
+      "operation_type": "read",
+      "reference": "references/list-authorized-awemes.md",
+      "rule": "rules/list-authorized-awemes.json",
+      "script": "scripts/endpoints/list_authorized_awemes.py"
+    },
+    {
+      "name": "list-custom-audiences",
+      "operation_type": "read",
+      "reference": "references/list-custom-audiences.md",
+      "rule": "rules/list-custom-audiences.json",
+      "script": "scripts/endpoints/list_custom_audiences.py"
+    },
+    {
+      "name": "get-poi-ids-by-multi-poi-id",
+      "operation_type": "read",
+      "reference": "references/get-poi-ids-by-multi-poi-id.md",
+      "rule": "rules/get-poi-ids-by-multi-poi-id.json",
+      "script": "scripts/endpoints/get_poi_ids_by_multi_poi_id.py"
+    },
+    {
+      "name": "list-tool-packs",
+      "operation_type": "read",
+      "reference": "references/list-tool-packs.md",
+      "rule": "rules/list-tool-packs.json",
+      "script": "scripts/endpoints/list_tool_packs.py"
+    },
+    {
+      "name": "get-tool-pack-detail",
+      "operation_type": "read",
+      "reference": "references/get-tool-pack-detail.md",
+      "rule": "rules/get-tool-pack-detail.json",
+      "script": "scripts/endpoints/get_tool_pack_detail.py"
+    },
+    {
+      "name": "list-market-pages",
+      "operation_type": "read",
+      "reference": "references/list-market-pages.md",
+      "rule": "rules/list-market-pages.json",
+      "script": "scripts/endpoints/list_market_pages.py"
+    },
+    {
+      "name": "get-market-page-detail",
+      "operation_type": "read",
+      "reference": "references/get-market-page-detail.md",
+      "rule": "rules/get-market-page-detail.json",
+      "script": "scripts/endpoints/get_market_page_detail.py"
+    },
+    {
+      "name": "list-consult-awemes",
+      "operation_type": "read",
+      "reference": "references/list-consult-awemes.md",
+      "rule": "rules/list-consult-awemes.json",
+      "script": "scripts/endpoints/list_consult_awemes.py"
+    },
+    {
+      "name": "batch-update-project-week-schedule",
+      "operation_type": "batch",
+      "reference": "references/batch-update-project-week-schedule.md",
+      "rule": "rules/batch-update-project-week-schedule.json",
+      "script": "scripts/endpoints/batch_update_project_week_schedule.py"
+    }
+  ]
+}
